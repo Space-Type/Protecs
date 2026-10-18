@@ -57,7 +57,7 @@ add_library(protecs STATIC ${PROTECS_SOURCES})
 target_include_directories(protecs PUBLIC include)
 
 if (WIN32)
-    target_link_libraries(wrecks wsock32 ws2_32)
+    target_link_libraries(protecs wsock32 ws2_32)
 endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "DebugTests")
