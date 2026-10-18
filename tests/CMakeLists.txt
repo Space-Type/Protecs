@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     errors/Error.cpp
+    errors/PacketError.cpp
     networking/Address.cpp
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
