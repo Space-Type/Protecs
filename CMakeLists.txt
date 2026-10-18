@@ -22,8 +22,8 @@ set(CMAKE_CXX_FLAGS_DEBUGTESTS "${CMAKE_CXX_FLAGS_DEBUG}"
                                CACHE STRING "Flags used by the C++ compiler during DebugTests builds.")
 
 set(PROTECS_SOURCES
-    src/components/Motion.hpp
     src/components/Transform.hpp
+    src/components/Velocity.hpp
     src/errors/Error/Error.cpp
     src/errors/Error/Error.hpp
     src/errors/NetworkError/NetworkError.cpp

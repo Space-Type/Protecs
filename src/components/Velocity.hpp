@@ -3,14 +3,14 @@
 ** Project - Protecs
 ** File description:
 ** Header file for
-** Motion component
+** Velocity component
 */
 
 #pragma once
 
 
 namespace Protecs::Components {
-    struct Motion {
+    struct Velocity {
         float velocityX;
         float velocityY;
         float angularVelocity;
