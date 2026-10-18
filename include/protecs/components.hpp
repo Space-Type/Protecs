@@ -9,5 +9,5 @@
 
 #pragma once
 
-#include "../../src/components/Transform.hpp"
-#include "../../src/components/Velocity.hpp"
+#include "components/types.hpp"
+#include "../../src/components/Manager.hpp"
