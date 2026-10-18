@@ -1,0 +1,71 @@
+##
+## EPITECH PROJECT, 2026
+## Project - Protecs
+## File description:
+## Main project build
+## file
+##
+
+cmake_minimum_required(VERSION 3.15)
+
+project(RType-Protocol VERSION 1.0
+                       DESCRIPTION "R-Type Network Protocol - R-Type project"
+                       HOMEPAGE_URL "https://github.com/Space-Type/Protocol"
+                       LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 23)
+
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release;MinSizeRel;RelWithDebInfo;DebugTests"
+                              CACHE STRING "Supported build types" FORCE)
+
+set(CMAKE_CXX_FLAGS_DEBUGTESTS "${CMAKE_CXX_FLAGS_DEBUG}"
+                               CACHE STRING "Flags used by the C++ compiler during DebugTests builds.")
+
+set(PROTECS_SOURCES
+    src/components/Motion.hpp
+    src/components/Transform.hpp
+    src/errors/Error/Error.cpp
+    src/errors/Error/Error.hpp
+    src/errors/NetworkError/NetworkError.cpp
+    src/errors/NetworkError/NetworkError.hpp
+    src/networking/Address/Address.hpp
+    src/networking/Address/Address.unix.cpp
+    src/networking/Address/Address.win.cpp
+    src/networking/Packet/Packet.cpp
+    src/networking/Packet/Packet.hpp
+    src/networking/packets/EntityPosition/EntityPosition.cpp
+    src/networking/packets/EntityPosition/EntityPosition.hpp
+    src/networking/packets/PlayerInput/PlayerInput.cpp
+    src/networking/packets/PlayerInput/PlayerInput.hpp
+    src/networking/packets/PacketData.hpp
+    src/networking/UDPSocket/UDPSocket.hpp
+    src/networking/UDPSocket/UDPSocket.unix.cpp
+    src/networking/UDPSocket/UDPSocket.win.cpp
+    src/utils/ElementIndex.hpp
+    src/utils/IndexOf.hpp
+    src/utils/Memory.hpp)
+
+if (WIN32)
+    set(EXCLUDED_PLATFORM "unix")
+else()
+    set(EXCLUDED_PLATFORM "win")
+endif()
+
+list(FILTER PROTECS_SOURCES EXCLUDE REGEX "\\.${EXCLUDED_PLATFORM}\\.[ch]pp$")
+
+add_library(protecs STATIC ${PROTECS_SOURCES})
+target_include_directories(protecs PUBLIC include)
+
+if (WIN32)
+    target_link_libraries(wrecks wsock32 ws2_32)
+endif()
+
+if (CMAKE_BUILD_TYPE STREQUAL "DebugTests")
+    if (NOT WIN32)
+        target_compile_options(protecs PRIVATE --coverage)
+        target_link_options(protecs PRIVATE --coverage)
+    endif()
+
+    enable_testing()
+    add_subdirectory(tests)
+endif()
