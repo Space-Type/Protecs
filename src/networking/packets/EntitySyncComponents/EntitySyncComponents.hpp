@@ -1,0 +1,41 @@
+/*
+** EPITECH PROJECT, 2026
+** Project - Protecs
+** File description:
+** Header file for
+** EntitySyncComponents struct
+*/
+
+#pragma once
+
+#include <cstdint>
+#include <bitset>
+#include <span>
+
+
+namespace Protecs::Networking::Packets {
+    /**
+     * Request from the client to
+     * synchronize an entity's components.
+     *
+     * If the server received the packet,
+     * it will reciprocate with the same
+     * packet with the server's data
+     * (i.e. if the signature is different,
+     * the server's signature will be sent
+     * instead).
+     *
+     * If the signature is out of date, the
+     * server will automatically send the
+     * difference in components to the client,
+     * via the EntityAddComponent and
+     * EntityRemoveComponent packets.
+     */
+    struct EntitySyncComponents {
+        std::uint32_t entity;
+        std::bitset<64> signature;
+
+        void serialize(std::span<std::uint8_t> output) const noexcept;
+        static EntitySyncComponents deserialize(std::span<const std::uint8_t> input) noexcept;
+    };
+}
