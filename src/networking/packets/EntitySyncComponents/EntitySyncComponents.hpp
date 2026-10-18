@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <protecs/common.hpp>
 #include <cstdint>
 #include <bitset>
 #include <span>
@@ -32,8 +33,8 @@ namespace Protecs::Networking::Packets {
      * EntityRemoveComponent packets.
      */
     struct EntitySyncComponents {
-        std::uint32_t entity;
-        std::bitset<64> signature;
+        Entity entity;
+        Signature signature;
 
         void serialize(std::span<std::uint8_t> output) const noexcept;
         static EntitySyncComponents deserialize(std::span<const std::uint8_t> input) noexcept;

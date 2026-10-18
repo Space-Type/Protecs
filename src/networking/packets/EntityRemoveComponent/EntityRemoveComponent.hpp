@@ -8,13 +8,14 @@
 
 #pragma once
 
+#include <protecs/common.hpp>
 #include <cstdint>
 #include <span>
 
 
 namespace Protecs::Networking::Packets {
     struct EntityRemoveComponent {
-        std::uint32_t entity;
+        Entity entity;
         std::uint16_t componentType;
 
         void serialize(std::span<std::uint8_t> output) const noexcept;

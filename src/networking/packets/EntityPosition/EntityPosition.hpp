@@ -8,13 +8,14 @@
 
 #pragma once
 
+#include <protecs/common.hpp>
 #include <cstdint>
 #include <span>
 
 
 namespace Protecs::Networking::Packets {
     struct EntityPosition {
-        std::uint32_t entity;
+        Entity entity;
         float x;
         float y;
 
