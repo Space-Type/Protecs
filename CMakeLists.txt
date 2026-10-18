@@ -23,7 +23,16 @@ set(CMAKE_CXX_FLAGS_DEBUGTESTS "${CMAKE_CXX_FLAGS_DEBUG}"
 
 
 if (NOT TARGET wrecks)
+    if (CMAKE_BUILD_TYPE STREQUAL "DebugTests")
+        set(CMAKE_BUILD_TYPE "Debug")
+        set(REVERT_TO_DEBUGTESTS yes)
+    endif()
+
     add_subdirectory(lib/wrecks)
+
+    if (REVERT_TO_DEBUGTESTS STREQUAL yes)
+        set(CMAKE_BUILD_TYPE "DebugTests")
+    endif()
 endif()
 
 

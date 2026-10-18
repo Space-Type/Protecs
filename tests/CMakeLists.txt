@@ -18,11 +18,13 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     errors/Error.cpp
+    errors/NetworkError.cpp
     errors/PacketError.cpp
     networking/Address.cpp
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
-    networking/UDPSocket.win.cpp)
+    networking/UDPSocket.win.cpp
+    utils/Memory.cpp)
 
 if (WIN32)
     set(EXCLUDED_PLATFORM "unix")
