@@ -21,6 +21,10 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release;MinSizeRel;RelWithDebInfo;DebugTest
 set(CMAKE_CXX_FLAGS_DEBUGTESTS "${CMAKE_CXX_FLAGS_DEBUG}"
                                CACHE STRING "Flags used by the C++ compiler during DebugTests builds.")
 
+
+add_subdirectory(lib/wrecks)
+
+
 set(PROTECS_SOURCES
     src/components/Transform.hpp
     src/components/Velocity.hpp
@@ -62,7 +66,9 @@ endif()
 list(FILTER PROTECS_SOURCES EXCLUDE REGEX "\\.${EXCLUDED_PLATFORM}\\.[ch]pp$")
 
 add_library(protecs STATIC ${PROTECS_SOURCES})
-target_include_directories(protecs PUBLIC include)
+target_include_directories(protecs PUBLIC include
+                                   PUBLIC lib/wrecks/include)
+target_link_libraries(protecs wrecks)
 
 if (WIN32)
     target_link_libraries(protecs wsock32 ws2_32)
