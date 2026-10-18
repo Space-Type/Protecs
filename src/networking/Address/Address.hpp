@@ -24,7 +24,19 @@ namespace Protecs::Networking {
 
         [[nodiscard]] std::string_view host() const noexcept;
         [[nodiscard]] std::uint16_t port() const noexcept;
+
+        bool operator==(const Address& other) const noexcept;
+        inline bool operator!=(const Address& other) const noexcept { return !(*this == other); }
     };
 }
 
 std::ostream& operator<<(std::ostream& output, const Protecs::Networking::Address& addr);
+
+template <>
+struct std::hash<Protecs::Networking::Address>{
+    static inline std::size_t operator()(const Protecs::Networking::Address& addr)
+    {
+        std::string_view repr(reinterpret_cast<const char*>(&addr), sizeof(Protecs::Networking::Address));
+        return std::hash<std::string_view>{}(repr);
+    }
+};
