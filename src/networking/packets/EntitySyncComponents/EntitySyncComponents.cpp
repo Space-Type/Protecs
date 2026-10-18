@@ -1,9 +1,9 @@
 /*
 ** EPITECH PROJECT, 2026
-** Project - RType
+** Project - Protecs
 ** File description:
 ** Implementation for
-** EntitySyncComponents
+** EntitySyncComponents struct
 */
 
 #include "EntitySyncComponents.hpp"
