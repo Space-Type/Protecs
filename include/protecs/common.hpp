@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include <cstdint>
-#include <bitset>
+#include <wrecks/common.hpp>
+#include <wrecks/ecs.hpp>
 
 
 namespace Protecs {
-    using Entity = std::uint32_t;
-    using Signature = std::bitset<64>;
+    using Entity = Wrecks::ECS::Entity;
+    using Signature = Wrecks::Signature;
 }
