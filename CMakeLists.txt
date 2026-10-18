@@ -22,7 +22,9 @@ set(CMAKE_CXX_FLAGS_DEBUGTESTS "${CMAKE_CXX_FLAGS_DEBUG}"
                                CACHE STRING "Flags used by the C++ compiler during DebugTests builds.")
 
 
-add_subdirectory(lib/wrecks)
+if (NOT TARGET wrecks)
+    add_subdirectory(lib/wrecks)
+endif()
 
 
 set(PROTECS_SOURCES
