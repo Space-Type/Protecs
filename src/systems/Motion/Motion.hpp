@@ -17,6 +17,9 @@ namespace Protecs::Systems {
         void* m_Engine;
 
         public:
+            static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = { .stage = Wrecks::ECS::SystemAttributes::STATE };
+
+        public:
             Motion() noexcept;
 
             static constexpr Signature signature() noexcept
