@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2026
-** Project - Wrecks
+** Project - Protecs
 ** File description:
 ** Windows implementation for
 ** UDPSocket class

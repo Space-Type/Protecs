@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2026
-** Project - RType
+** Project - Protecs
 ** File description:
 ** Header file for
 ** Networking module's
