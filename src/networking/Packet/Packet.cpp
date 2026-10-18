@@ -8,7 +8,9 @@
 
 #include "Packet.hpp"
 #include <protecs.hpp>
-#include <stdexcept>
+
+
+#define index_of(type) element_index_v<Packets::type, Packets::PacketData>
 
 
 auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> Packet
@@ -36,15 +38,27 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
     ++dataStart;
 
     switch (type) {
-        case element_index_v<Packets::EntityPosition, Packets::PacketData>:
+        case index_of(EntityAddComponent):
+            result = Packets::EntityAddComponent::deserialize(std::span(dataStart, raw.cend()));
+            break;
+
+        case index_of(EntityPosition):
             result = Packets::EntityPosition::deserialize(std::span(dataStart, raw.cend()));
             break;
 
-        case element_index_v<Packets::PlayerInput, Packets::PacketData>:
+        case index_of(EntityRemoveComponent):
+            result = Packets::EntityRemoveComponent::deserialize(std::span(dataStart, raw.cend()));
+            break;
+
+        case index_of(EntitySyncComponents):
+            result = Packets::EntitySyncComponents::deserialize(std::span(dataStart, raw.cend()));
+            break;
+
+        case index_of(PlayerInput):
             result = Packets::PlayerInput::deserialize(std::span(dataStart, raw.cend()));
             break;
 
-        default: throw std::runtime_error("unknown packet data type " + std::to_string(type));
+        default: throw PacketError("unknown packet data type " + std::to_string(type));
     }
 
     return result;

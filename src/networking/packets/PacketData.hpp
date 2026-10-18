@@ -13,6 +13,9 @@
 
 
 namespace Protecs::Networking::Packets {
-    using PacketData = std::variant<EntityPosition,
+    using PacketData = std::variant<EntityAddComponent,
+                                    EntityPosition,
+                                    EntityRemoveComponent,
+                                    EntitySyncComponents,
                                     PlayerInput>;
 }
