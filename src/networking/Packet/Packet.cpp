@@ -10,7 +10,7 @@
 #include <protecs.hpp>
 
 
-#define index_of(type) element_index_v<Packets::type, Packets::PacketData>
+#define index_of(type) Wrecks::Utils::element_index_v<Packets::type, Packets::PacketData>
 
 
 auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> Packet
@@ -30,7 +30,6 @@ auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> 
 
 auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
 {
-    using Protecs::Utils::element_index_v;
     Packets::PacketData result;
 
     auto dataStart = raw.cbegin();
