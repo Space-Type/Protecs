@@ -65,8 +65,7 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.hpp
     src/networking/UDPSocket/UDPSocket.unix.cpp
     src/networking/UDPSocket/UDPSocket.win.cpp
-    src/systems/Motion/Motion.cpp
-    src/systems/Motion/Motion.hpp
+    src/systems/Motion.hpp
     src/systems/Tuple.hpp
     src/utils/ElementIndex.hpp
     src/utils/IndexOf.hpp
