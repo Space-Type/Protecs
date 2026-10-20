@@ -67,7 +67,8 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.win.cpp
     src/systems/Motion.hpp
     src/systems/Tuple.hpp
-    src/utils/Memory.hpp)
+    src/utils/Memory.hpp
+    src/utils/Vec2D.hpp)
 
 if (WIN32)
     set(EXCLUDED_PLATFORM "unix")
