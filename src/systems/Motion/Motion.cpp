@@ -21,7 +21,7 @@ Protecs::Systems::Motion::Motion() noexcept
 
 }
 
-void Protecs::Systems::Motion::operator()(Entity entity)
+void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity)
 {
     auto& velocity = m_GetTransform(entity);
     auto& transform = m_GetVelocity(entity);
