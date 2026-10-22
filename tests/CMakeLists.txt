@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     components/Transform.cpp
+    components/Velocity.cpp
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp

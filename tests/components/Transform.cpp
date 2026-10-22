@@ -69,12 +69,10 @@ TEST(components_Transform, serializeAndDeserialize)
 
 TEST(components_Transform, smallBufferSerialize)
 {
-    Transform data = { { 1.5f, -5.2f }, 0.f, 50.f };
-
     std::uint8_t store;
     std::uint8_t* buffer = &store;
 
-    EXPECT_THROW(data.serialize(buffer, sizeof(store)), Protecs::SerializationError);
+    EXPECT_THROW(TEST_DATA.serialize(buffer, sizeof(store)), Protecs::SerializationError);
 }
 
 TEST(components_Transform, smallBufferDeserialize)
