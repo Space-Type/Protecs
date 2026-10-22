@@ -7,20 +7,27 @@
 */
 
 #include "EntityAddComponent.hpp"
+#include <protecs/errors.hpp>
 #include <protecs/utils.hpp>
 
 
-void Protecs::Networking::Packets::EntityAddComponent::serialize(std::span<std::uint8_t> output) const noexcept
+void Protecs::Networking::Packets::EntityAddComponent::serialize(std::span<std::uint8_t> output) const
 {
+    if (output.size() < packedSize())
+        throw SerializationError("unable to serialize EntityAddComponent packet as the output buffer is too small");
+
     auto* current = output.data();
 
     Utils::copyFromValue(current, entity);
     Utils::copyFromValue(current, componentType);
 }
 
-auto Protecs::Networking::Packets::EntityAddComponent::deserialize(std::span<const std::uint8_t> output) noexcept -> EntityAddComponent
+auto Protecs::Networking::Packets::EntityAddComponent::deserialize(std::span<const std::uint8_t> input) -> EntityAddComponent
 {
-    const auto* current = output.data();
+    if (input.size() < packedSize())
+        throw SerializationError("unable to deserialize EntityAddComponent packet as the input buffer is too small");
+
+    const auto* current = input.data();
     EntityAddComponent result;
 
     Utils::copyToValue(result.entity, current);

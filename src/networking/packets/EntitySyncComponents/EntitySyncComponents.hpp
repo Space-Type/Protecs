@@ -36,8 +36,8 @@ namespace Protecs::Networking::Packets {
         Entity entity;
         Signature signature;
 
-        void serialize(std::span<std::uint8_t> output) const noexcept;
-        static EntitySyncComponents deserialize(std::span<const std::uint8_t> input) noexcept;
+        void serialize(std::span<std::uint8_t> output) const;
+        static EntitySyncComponents deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(entity) + (Signature{}.size() + 7) / 8; }
     };
