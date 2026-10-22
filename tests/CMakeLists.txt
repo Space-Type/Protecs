@@ -23,6 +23,7 @@ set(TEST_SOURCES
     errors/NetworkError.cpp
     errors/PacketError.cpp
     networking/Address.cpp
+    networking/NetworkEntity.cpp
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
