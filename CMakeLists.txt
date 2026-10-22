@@ -53,6 +53,8 @@ set(PROTECS_SOURCES
     src/networking/Address/Address.hpp
     src/networking/Address/Address.unix.cpp
     src/networking/Address/Address.win.cpp
+    src/networking/NetworkEntity/NetworkEntity.cpp
+    src/networking/NetworkEntity/NetworkEntity.hpp
     src/networking/Packet/Packet.cpp
     src/networking/Packet/Packet.hpp
     src/networking/packets/EntityAddComponent/EntityAddComponent.cpp
