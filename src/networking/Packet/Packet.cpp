@@ -55,6 +55,14 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = Packets::EntityComponentData::deserialize(std::span(dataStart, dataEnd));
             break;
 
+        case index_of(EntityCreate):
+            result = Packets::EntityCreate::deserialize(std::span(dataStart, dataEnd));
+            break;
+
+        case index_of(EntityDelete):
+            result = Packets::EntityDelete::deserialize(std::span(dataStart, dataEnd));
+            break;
+
         case index_of(EntityRemoveComponent):
             result = Packets::EntityRemoveComponent::deserialize(std::span(dataStart, dataEnd));
             break;
