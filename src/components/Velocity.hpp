@@ -8,11 +8,12 @@
 
 #pragma once
 
+#include <protecs/utils.hpp>
+
 
 namespace Protecs::Components {
     struct Velocity {
-        float velocityX;
-        float velocityY;
-        float angularVelocity;
+        Utils::Vec2D<float> position;
+        float angular;
     };
 }

@@ -8,6 +8,5 @@
 
 #pragma once
 
-#include "../../src/utils/ElementIndex.hpp"
-#include "../../src/utils/IndexOf.hpp"
 #include "../../src/utils/Memory.hpp"
+#include "../../src/utils/Vec2D.hpp"

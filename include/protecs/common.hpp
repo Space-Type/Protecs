@@ -15,4 +15,7 @@
 namespace Protecs {
     using Entity = Wrecks::ECS::Entity;
     using Signature = Wrecks::Signature;
+
+    inline constexpr float POSITION_MAX_X = 800.f;
+    inline constexpr float POSITION_MAX_Y = 450.f;
 }

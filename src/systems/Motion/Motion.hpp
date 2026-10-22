@@ -8,13 +8,16 @@
 
 #pragma once
 
-#include <protecs/common.hpp>
 #include <protecs/components.hpp>
+#include <protecs/common.hpp>
+#include <wrecks/ecs.hpp>
+#include <functional>
 
 
 namespace Protecs::Systems {
     class Motion {
-        void* m_Engine;
+        std::function<Components::Transform&(Entity entity)> m_GetTransform;
+        std::function<Components::Velocity&(Entity entity)> m_GetVelocity;
 
         public:
             static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = { .stage = Wrecks::ECS::SystemAttributes::STATE };
@@ -29,7 +32,12 @@ namespace Protecs::Systems {
                     .set(Components::Manager::index<Components::Velocity>());
             }
 
-            inline void setEngine(void* engine) noexcept { m_Engine = engine; }
+            template <typename T>
+            void setEngine(T* engine) noexcept
+            {
+                m_GetTransform = [=](Entity entity) noexcept -> Components::Transform& { return engine->template get<Components::Transform>()[entity]; };
+                m_GetVelocity = [=](Entity entity) noexcept  -> Components::Velocity&{ return engine->template get<Components::Velocity>()[entity]; };
+            }
 
             void operator()(Entity entity);
     };

@@ -7,33 +7,30 @@
 */
 
 #include "Motion.hpp"
+#include <algorithm>
 
 
-static constexpr float FRICTION_FACTOR_X = 0.89f;
+static constexpr float FRICTION_FACTOR_X = 0.90;
 static constexpr float FRICTION_FACTOR_Y = FRICTION_FACTOR_X;
 
 
 Protecs::Systems::Motion::Motion() noexcept
+    : m_GetTransform()
+    , m_GetVelocity()
 {
 
 }
 
-void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity)
+void Protecs::Systems::Motion::operator()(Entity entity)
 {
-    // Game::Engine& engine = *reinterpret_cast<Game::Engine*>(m_Engine);
+    auto& velocity = m_GetTransform(entity);
+    auto& transform = m_GetVelocity(entity);
 
-    // auto& physicsState = engine.get<Components::Physics>()[entity];
-    // auto& transforms = engine.get<Components::Transform>()[entity];
+    transform.position += velocity.position;
 
-    // physicsState.velocityX += 3.f * (IsKeyDown(KEY_RIGHT) - IsKeyDown(KEY_LEFT));
-    // physicsState.velocityY += 3.f * (IsKeyDown(KEY_DOWN) - IsKeyDown(KEY_UP));
+    transform.position.x = std::clamp(transform.position.x, 0.f, POSITION_MAX_X);
+    transform.position.y = std::clamp(transform.position.y, 0.f, POSITION_MAX_Y);
 
-    // physicsState.velocityX = std::clamp(physicsState.velocityX, -2.f, 2.f);
-    // physicsState.velocityY = std::clamp(physicsState.velocityY, -2.f, 2.f);
-
-    // transforms.x += physicsState.velocityX;
-    // transforms.y += physicsState.velocityY;
-
-    // physicsState.velocityX *= FRICTION_FACTOR_X;
-    // physicsState.velocityY *= FRICTION_FACTOR_Y;
+    velocity.position.x *= FRICTION_FACTOR_X;
+    velocity.position.y *= FRICTION_FACTOR_Y;
 }

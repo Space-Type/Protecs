@@ -68,9 +68,8 @@ set(PROTECS_SOURCES
     src/systems/Motion/Motion.cpp
     src/systems/Motion/Motion.hpp
     src/systems/Tuple.hpp
-    src/utils/ElementIndex.hpp
-    src/utils/IndexOf.hpp
-    src/utils/Memory.hpp)
+    src/utils/Memory.hpp
+    src/utils/Vec2D.hpp)
 
 if (WIN32)
     set(EXCLUDED_PLATFORM "unix")
