@@ -23,7 +23,7 @@ auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> 
         std::advance(current, data.packedSize());
     }, data);
 
-    auto bytesFilled = std::distance(current, packet.raw.begin());
+    auto bytesFilled = std::distance(packet.raw.begin(), current);
     packet.filled = bytesFilled >= 0
         ? static_cast<std::size_t>(bytesFilled)
         : 0;
