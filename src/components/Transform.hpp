@@ -8,11 +8,12 @@
 
 #pragma once
 
+#include <protecs/utils.hpp>
+
 
 namespace Protecs::Components {
     struct Transform {
-        float x;
-        float y;
+        Utils::Vec2D<float> position;
         float rotation;
         float scale;
     };
