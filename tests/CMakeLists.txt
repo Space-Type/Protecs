@@ -17,6 +17,7 @@ FetchContent_Declare(googletest
 FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
+    components/Transform.cpp
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp
