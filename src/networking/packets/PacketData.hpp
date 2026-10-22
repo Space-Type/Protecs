@@ -17,5 +17,8 @@ namespace Protecs::Networking::Packets {
                                     EntityComponentData,
                                     EntityRemoveComponent,
                                     EntitySyncComponents,
-                                    PlayerInput>;
+                                    Ping,
+                                    PlayerInput,
+                                    PlayerJoin,
+                                    PlayerLeave>;
 }

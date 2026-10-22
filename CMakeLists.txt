@@ -63,8 +63,14 @@ set(PROTECS_SOURCES
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.cpp
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.hpp
+    src/networking/packets/Ping/Ping.cpp
+    src/networking/packets/Ping/Ping.hpp
     src/networking/packets/PlayerInput/PlayerInput.cpp
     src/networking/packets/PlayerInput/PlayerInput.hpp
+    src/networking/packets/PlayerJoin/PlayerJoin.cpp
+    src/networking/packets/PlayerJoin/PlayerJoin.hpp
+    src/networking/packets/PlayerLeave/PlayerLeave.cpp
+    src/networking/packets/PlayerLeave/PlayerLeave.hpp
     src/networking/packets/PacketData.hpp
     src/networking/UDPSocket/UDPSocket.hpp
     src/networking/UDPSocket/UDPSocket.unix.cpp
