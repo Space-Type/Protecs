@@ -67,6 +67,10 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = Packets::PlayerInput::deserialize(std::span(dataStart, dataEnd));
             break;
 
+        case index_of(PlayerJoin):
+            result = Packets::PlayerJoin::deserialize(std::span(dataStart, dataEnd));
+            break;
+
         default: throw PacketError("unknown packet data type " + std::to_string(type));
     }
 

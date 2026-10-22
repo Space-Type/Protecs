@@ -65,6 +65,8 @@ set(PROTECS_SOURCES
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.hpp
     src/networking/packets/PlayerInput/PlayerInput.cpp
     src/networking/packets/PlayerInput/PlayerInput.hpp
+    src/networking/packets/PlayerJoin/PlayerJoin.cpp
+    src/networking/packets/PlayerJoin/PlayerJoin.hpp
     src/networking/packets/PacketData.hpp
     src/networking/UDPSocket/UDPSocket.hpp
     src/networking/UDPSocket/UDPSocket.unix.cpp

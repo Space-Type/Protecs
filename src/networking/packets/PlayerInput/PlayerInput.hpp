@@ -3,7 +3,7 @@
 ** Project - Protecs
 ** File description:
 ** Header file for
-** PlayerInput struct
+** PlayerInput packet
 */
 
 #pragma once

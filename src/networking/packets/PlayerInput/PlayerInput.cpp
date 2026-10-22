@@ -3,7 +3,7 @@
 ** Project - Protecs
 ** File description:
 ** Implementation for
-** PlayerInput struct
+** PlayerInput packet
 */
 
 #include "PlayerInput.hpp"
