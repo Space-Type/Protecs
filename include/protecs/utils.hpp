@@ -9,4 +9,4 @@
 #pragma once
 
 #include "../../src/utils/Memory.hpp"
-#include "../../src/utils/Vector2D.hpp"
+#include "../../src/utils/Vec2D.hpp"
