@@ -7,20 +7,27 @@
 */
 
 #include "PlayerInput.hpp"
+#include <protecs/errors.hpp>
 #include <protecs/utils.hpp>
 
 
-void Protecs::Networking::Packets::PlayerInput::serialize(std::span<std::uint8_t> output) const noexcept
+void Protecs::Networking::Packets::PlayerInput::serialize(std::span<std::uint8_t> output) const
 {
+    if (output.size() < packedSize())
+        throw SerializationError("unable to serialize PlayerInput packet as the output buffer is too small");
+
     auto* current = output.data();
 
     Utils::copyFromValue(current, input);
     Utils::copyFromValue(current, state);
 }
 
-auto Protecs::Networking::Packets::PlayerInput::deserialize(std::span<const std::uint8_t> output) noexcept -> PlayerInput
+auto Protecs::Networking::Packets::PlayerInput::deserialize(std::span<const std::uint8_t> input) -> PlayerInput
 {
-    const auto* current = output.data();
+    if (input.size() < packedSize())
+        throw SerializationError("unable to deserialize PlayerInput packet as the input buffer is too small");
+
+    const auto* current = input.data();
     PlayerInput result;
 
     Utils::copyToValue(result.input, current);

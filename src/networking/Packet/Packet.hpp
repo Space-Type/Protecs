@@ -16,8 +16,9 @@
 namespace Protecs::Networking {
     struct Packet {
         std::array<std::uint8_t, sizeof(Packets::PacketData)> raw;
+        std::size_t filled;  // amount of bytes in raw which are actually used
 
         static Packet serialize(const Packets::PacketData& data);
-        Packets::PacketData deserialize(std::size_t bytes) const;
+        Packets::PacketData deserialize() const;
     };
 }

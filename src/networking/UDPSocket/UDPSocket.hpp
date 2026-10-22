@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../Address/Address.hpp"
+#include "../Packet/Packet.hpp"
 #include <string_view>
 #include <cstdint>
 
@@ -53,6 +54,11 @@ namespace Protecs::Networking {
             template <typename T>
             bool send(const T& data, const Address& dest) noexcept { return sendBytes(reinterpret_cast<const char*>(&data), sizeof(T), dest); }
 
+            inline bool send(const Packet& packet, const Address& dest) noexcept
+            {
+                return sendBytes(reinterpret_cast<const char*>(packet.raw.data()), packet.filled, dest);
+            }
+
             /**
              * Receives data available on the socket.
              * Returns the amount of bytes
@@ -63,7 +69,14 @@ namespace Protecs::Networking {
              * of the packet's sender.
              */
             template <typename T>
-            size_t receive(T& data, Address* sender = nullptr) noexcept { return receiveBytes(reinterpret_cast<char*>(&data), sizeof(T), sender); }
+            std::size_t receive(T& data, Address* sender = nullptr) noexcept { return receiveBytes(reinterpret_cast<char*>(&data), sizeof(T), sender); }
+
+            inline std::size_t receive(Packet& packet, Address* sender = nullptr) noexcept
+            {
+                auto packetSize = receiveBytes(reinterpret_cast<char*>(packet.raw.data()), packet.raw.size(), sender);
+                packet.filled = packetSize;
+                return packetSize;
+            }
 
             /**
              * Simpler version of `send()`, which is

@@ -16,14 +16,27 @@ static Protecs::Components::Variant deserializeComponent(std::size_t type, std::
 
 void Protecs::Networking::Packets::EntityComponentData::serialize(std::span<std::uint8_t> output) const
 {
+    if (output.size() < packedSize())
+        throw SerializationError("unable to serialize EntityComponentData packet as the output buffer is too small");
+
     auto* current = output.data();
+    std::uint16_t type = static_cast<std::uint16_t>(component.index());
 
     Utils::copyFromValue(current, entity);
-    Utils::copyFromValue(current, component);
+    Utils::copyFromValue(current, type);
+
+    std::size_t remainingSize = output.size() - (current - output.data());
+
+    std::visit([=, &current](const auto& component){
+        component.serialize(current, remainingSize);
+    }, component);
 }
 
 auto Protecs::Networking::Packets::EntityComponentData::deserialize(std::span<const std::uint8_t> input) -> EntityComponentData
 {
+    if (input.size() < partialPackedSize())
+        throw SerializationError("unable to deserialize EntityComponentData packet as the input buffer is too small");
+
     const auto* current = input.data();
     EntityComponentData result;
     std::uint16_t type;
@@ -33,6 +46,17 @@ auto Protecs::Networking::Packets::EntityComponentData::deserialize(std::span<co
     result.component = ::deserializeComponent(type, std::span(std::span<const std::uint8_t>::const_iterator(current), input.cend()));
 
     return result;
+}
+
+auto Protecs::Networking::Packets::EntityComponentData::packedSize() const noexcept -> std::size_t
+{
+    std::size_t size = partialPackedSize();
+
+    std::visit([&](const auto& component){
+        size += component.packedSize();
+    }, component);
+
+    return size;
 }
 
 
