@@ -15,7 +15,7 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityDelete {
-        Entity id;
+        NetworkEntity id;
 
         void serialize(std::span<std::uint8_t> output) const;
         static EntityDelete deserialize(std::span<const std::uint8_t> input);
