@@ -1,0 +1,44 @@
+/*
+** EPITECH PROJECT, 2026
+** Project - Protecs
+** File description:
+** Header file for
+** Motion system
+*/
+
+#pragma once
+
+#include <protecs/components.hpp>
+#include <protecs/common.hpp>
+#include <wrecks/ecs.hpp>
+#include <functional>
+
+
+namespace Protecs::Systems {
+    class Motion {
+        std::function<Components::Transform&(Entity entity)> m_GetTransform;
+        std::function<Components::Velocity&(Entity entity)> m_GetVelocity;
+
+        public:
+            static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = { .stage = Wrecks::ECS::SystemAttributes::STATE };
+
+        public:
+            Motion() noexcept;
+
+            static constexpr Signature signature() noexcept
+            {
+                return Signature()
+                    .set(Components::Manager::index<Components::Transform>())
+                    .set(Components::Manager::index<Components::Velocity>());
+            }
+
+            template <typename T>
+            void setEngine(T* engine) noexcept
+            {
+                m_GetTransform = [=](Entity entity) noexcept -> Components::Transform& { return engine->template get<Components::Transform>()[entity]; };
+                m_GetVelocity = [=](Entity entity) noexcept  -> Components::Velocity&{ return engine->template get<Components::Velocity>()[entity]; };
+            }
+
+            void operator()(Entity entity);
+    };
+}
