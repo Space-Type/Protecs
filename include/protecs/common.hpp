@@ -13,7 +13,7 @@
 
 
 namespace Protecs {
-    using Entity = Wrecks::ECS::Entity;
+    using NetworkEntity = std::uint64_t;
     using Signature = Wrecks::Signature;
 
     inline constexpr float POSITION_MAX_X = 800.f;
