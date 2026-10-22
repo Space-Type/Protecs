@@ -18,6 +18,6 @@ namespace Protecs::Networking {
         std::array<std::uint8_t, sizeof(Packets::PacketData)> raw;
 
         static Packet serialize(const Packets::PacketData& data);
-        Packets::PacketData deserialize() const;
+        Packets::PacketData deserialize(std::size_t bytes) const;
     };
 }

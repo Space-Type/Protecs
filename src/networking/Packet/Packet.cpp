@@ -28,33 +28,36 @@ auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> 
     return packet;
 }
 
-auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
+auto Protecs::Networking::Packet::deserialize(std::size_t bytes) const -> Packets::PacketData
 {
     Packets::PacketData result;
 
     auto dataStart = raw.cbegin();
+    auto dataEnd = raw.cbegin();
+    std::advance(dataEnd, bytes);
+
     std::uint8_t type = *dataStart;
     ++dataStart;
 
     switch (type) {
         case index_of(EntityAddComponent):
-            result = Packets::EntityAddComponent::deserialize(std::span(dataStart, raw.cend()));
+            result = Packets::EntityAddComponent::deserialize(std::span(dataStart, dataEnd));
             break;
 
         case index_of(EntityComponentData):
-            result = Packets::EntityComponentData::deserialize(std::span(dataStart, raw.cend()));
+            result = Packets::EntityComponentData::deserialize(std::span(dataStart, dataEnd));
             break;
 
         case index_of(EntityRemoveComponent):
-            result = Packets::EntityRemoveComponent::deserialize(std::span(dataStart, raw.cend()));
+            result = Packets::EntityRemoveComponent::deserialize(std::span(dataStart, dataEnd));
             break;
 
         case index_of(EntitySyncComponents):
-            result = Packets::EntitySyncComponents::deserialize(std::span(dataStart, raw.cend()));
+            result = Packets::EntitySyncComponents::deserialize(std::span(dataStart, dataEnd));
             break;
 
         case index_of(PlayerInput):
-            result = Packets::PlayerInput::deserialize(std::span(dataStart, raw.cend()));
+            result = Packets::PlayerInput::deserialize(std::span(dataStart, dataEnd));
             break;
 
         default: throw PacketError("unknown packet data type " + std::to_string(type));
