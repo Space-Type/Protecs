@@ -10,31 +10,38 @@
 #include <protecs.hpp>
 
 
-#define index_of(type) Wrecks::Utils::element_index_v<Packets::type, Packets::PacketData>
-
-
 auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> Packet
 {
     Packet packet = {};
 
-    auto dataStart = packet.raw.begin();
-    *dataStart = static_cast<std::uint8_t>(data.index());
-    ++dataStart;
+    auto current = packet.raw.begin();
+    *current = static_cast<std::uint8_t>(data.index());
+    ++current;
 
     std::visit([&](const auto& data){
-        data.serialize(std::span(dataStart, packet.raw.end()));
+        data.serialize(std::span(current, packet.raw.end()));
+        std::advance(current, data.packedSize());
     }, data);
+
+    auto bytesFilled = std::distance(current, packet.raw.begin());
+    packet.filled = bytesFilled >= 0
+        ? static_cast<std::size_t>(bytesFilled)
+        : 0;
 
     return packet;
 }
 
-auto Protecs::Networking::Packet::deserialize(std::size_t bytes) const -> Packets::PacketData
+
+#define index_of(type) Wrecks::Utils::element_index_v<Packets::type, Packets::PacketData>
+
+
+auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
 {
     Packets::PacketData result;
 
     auto dataStart = raw.cbegin();
     auto dataEnd = raw.cbegin();
-    std::advance(dataEnd, bytes);
+    std::advance(dataEnd, filled);
 
     std::uint8_t type = *dataStart;
     ++dataStart;
