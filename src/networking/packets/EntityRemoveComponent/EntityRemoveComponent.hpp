@@ -15,7 +15,7 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityRemoveComponent {
-        Entity entity;
+        NetworkEntity entity;
         std::uint16_t componentType;
 
         void serialize(std::span<std::uint8_t> output) const;

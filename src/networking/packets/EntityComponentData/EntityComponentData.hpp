@@ -16,7 +16,7 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityComponentData {
-        Entity entity;
+        NetworkEntity entity;
         Components::Variant component;
 
         void serialize(std::span<std::uint8_t> output) const;
