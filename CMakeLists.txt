@@ -67,6 +67,8 @@ set(PROTECS_SOURCES
     src/networking/packets/PlayerInput/PlayerInput.hpp
     src/networking/packets/PlayerJoin/PlayerJoin.cpp
     src/networking/packets/PlayerJoin/PlayerJoin.hpp
+    src/networking/packets/PlayerLeave/PlayerLeave.cpp
+    src/networking/packets/PlayerLeave/PlayerLeave.hpp
     src/networking/packets/PacketData.hpp
     src/networking/UDPSocket/UDPSocket.hpp
     src/networking/UDPSocket/UDPSocket.unix.cpp
