@@ -9,10 +9,14 @@
 #pragma once
 
 #include <protecs/components/types.hpp>
+#include <wrecks/utils.hpp>
 #include <wrecks/ecs.hpp>
+#include <variant>
 
 
 namespace Protecs::Components {
     using Manager = Wrecks::ECS::ComponentManager<Transform,
                                                   Velocity>;
+
+    using Variant = Wrecks::Utils::replace_container_type_t<std::variant<>, Manager>;
 }

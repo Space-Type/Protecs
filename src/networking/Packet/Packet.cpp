@@ -41,8 +41,8 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = Packets::EntityAddComponent::deserialize(std::span(dataStart, raw.cend()));
             break;
 
-        case index_of(EntityPosition):
-            result = Packets::EntityPosition::deserialize(std::span(dataStart, raw.cend()));
+        case index_of(EntityComponentData):
+            result = Packets::EntityComponentData::deserialize(std::span(dataStart, raw.cend()));
             break;
 
         case index_of(EntityRemoveComponent):

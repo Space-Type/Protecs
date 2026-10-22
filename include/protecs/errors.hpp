@@ -11,3 +11,4 @@
 #include "../../src/errors/Error/Error.hpp"
 #include "../../src/errors/NetworkError/NetworkError.hpp"
 #include "../../src/errors/PacketError/PacketError.hpp"
+#include "../../src/errors/SerializationError/SerializationError.hpp"

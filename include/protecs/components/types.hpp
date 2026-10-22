@@ -8,5 +8,5 @@
 
 #pragma once
 
-#include "../../../src/components/Transform.hpp"
-#include "../../../src/components/Velocity.hpp"
+#include "../../../src/components/Transform/Transform.hpp"
+#include "../../../src/components/Velocity/Velocity.hpp"

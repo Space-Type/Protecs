@@ -21,11 +21,11 @@ namespace Protecs::Utils {
      * then advanced to the first byte
      * after the copied value.
      */
-    template <typename Dest, typename Val>
-    inline void copyFromValue(Dest*& dest, const Val& value) noexcept
+    template <typename Val>
+    inline void copyFromValue(std::uint8_t*& dest, const Val& value) noexcept
     {
         std::memcpy(dest, &value, sizeof(Val));
-        *reinterpret_cast<char**>(&dest) += sizeof(Val);
+        dest += sizeof(Val);
     }
 
     /**
@@ -34,21 +34,20 @@ namespace Protecs::Utils {
      * for bitsets, which aren't guaranteed
      * to work with ::memcpy().
      */
-    template <typename Dest, std::size_t N>
-    inline void copyFromValue(Dest*& dest, const std::bitset<N>& value) noexcept
+    template <std::size_t N>
+    inline void copyFromValue(std::uint8_t*& dest, const std::bitset<N>& value) noexcept
     {
         std::size_t bytes = (N + 7) / 8;
         std::fill_n(dest, bytes, 0);
-
-        auto* byteDest = reinterpret_cast<std::uint8_t*>(dest);
-        dest = reinterpret_cast<Dest*>(byteDest + bytes);
 
         for (std::size_t i = 0; i < N; i++) {
             if (!value[i])
                 continue;
 
-            byteDest[i / 8] |= static_cast<std::uint8_t>(1u << (i % 8));
+            dest[i / 8] |= static_cast<std::uint8_t>(1u << (i % 8));
         }
+
+        dest += bytes;
     }
 
     /**
@@ -59,11 +58,11 @@ namespace Protecs::Utils {
      * be advanced to the first byte
      * after the copied value.
      */
-    template <typename Dest, typename Src>
-    inline void copyToValue(Dest& dest, const Src*& src)
+    template <typename Dest>
+    inline void copyToValue(Dest& dest, const std::uint8_t*& src)
     {
         std::memcpy(&dest, src, sizeof(Dest));
-        *reinterpret_cast<const char**>(&src) += sizeof(Dest);
+        src += sizeof(Dest);
     }
 
     /**
@@ -72,16 +71,15 @@ namespace Protecs::Utils {
      * for bitsets, which aren't guaranteed
      * to work with ::memcpy().
      */
-    template <std::size_t N, typename Src>
-    inline void copyToValue(std::bitset<N>& dest, const Src*& src)
+    template <std::size_t N>
+    inline void copyToValue(std::bitset<N>& dest, const std::uint8_t*& src)
     {
         std::size_t bytes = (N + 7) / 8;
 
-        auto* byteSrc = reinterpret_cast<const std::uint8_t*>(src);
-        src = reinterpret_cast<const Src*>(byteSrc + bytes);
-
         for (std::size_t i = 0; i < N; i++) {
-            dest[i] = (byteSrc[i / 8] >> (i % 8)) & 1u;
+            dest[i] = (src[i / 8] >> (i % 8)) & 1u;
         }
+
+        src += bytes;
     }
 }
