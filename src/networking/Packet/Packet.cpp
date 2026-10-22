@@ -63,12 +63,20 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = Packets::EntitySyncComponents::deserialize(std::span(dataStart, dataEnd));
             break;
 
+        case index_of(Ping):
+            result = Packets::Ping::deserialize(std::span(dataStart, dataEnd));
+            break;
+
         case index_of(PlayerInput):
             result = Packets::PlayerInput::deserialize(std::span(dataStart, dataEnd));
             break;
 
         case index_of(PlayerJoin):
             result = Packets::PlayerJoin::deserialize(std::span(dataStart, dataEnd));
+            break;
+
+        case index_of(PlayerLeave):
+            result = Packets::PlayerLeave::deserialize(std::span(dataStart, dataEnd));
             break;
 
         default: throw PacketError("unknown packet data type " + std::to_string(type));
