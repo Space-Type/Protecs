@@ -12,11 +12,9 @@
 #include <algorithm>
 
 
-auto Protecs::Networking::Packets::PlayerJoin::str() const -> std::string
+auto Protecs::Networking::Packets::PlayerJoin::str() const -> std::string_view
 {
-    std::string result(length, '\0');
-    result.replace(0, length, name.data());
-    return result;
+    return std::string_view(name.data(), static_cast<std::size_t>(length));
 }
 
 void Protecs::Networking::Packets::PlayerJoin::serialize(std::span<std::uint8_t> output) const

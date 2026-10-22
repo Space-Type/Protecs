@@ -8,8 +8,8 @@
 
 #pragma once
 
+#include <string_view>
 #include <cstdint>
-#include <string>
 #include <array>
 #include <span>
 
@@ -19,7 +19,7 @@ namespace Protecs::Networking::Packets {
         std::uint8_t length;
         std::array<char, 32> name;
 
-        std::string str() const;
+        std::string_view str() const;
 
         void serialize(std::span<std::uint8_t> output) const;
         static PlayerJoin deserialize(std::span<const std::uint8_t> input);
