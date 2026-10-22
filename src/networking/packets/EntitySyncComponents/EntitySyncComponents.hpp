@@ -10,7 +10,6 @@
 
 #include <protecs/common.hpp>
 #include <cstdint>
-#include <bitset>
 #include <span>
 
 
@@ -33,7 +32,7 @@ namespace Protecs::Networking::Packets {
      * EntityRemoveComponent packets.
      */
     struct EntitySyncComponents {
-        Entity entity;
+        NetworkEntity entity;
         Signature signature;
 
         void serialize(std::span<std::uint8_t> output) const;
