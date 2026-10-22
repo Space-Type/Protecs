@@ -37,15 +37,19 @@ endif()
 
 
 set(PROTECS_SOURCES
+    src/components/Transform/Transform.cpp
+    src/components/Transform/Transform.hpp
+    src/components/Velocity/Velocity.cpp
+    src/components/Velocity/Velocity.hpp
     src/components/Manager.hpp
-    src/components/Transform.hpp
-    src/components/Velocity.hpp
     src/errors/Error/Error.cpp
     src/errors/Error/Error.hpp
     src/errors/NetworkError/NetworkError.cpp
     src/errors/NetworkError/NetworkError.hpp
     src/errors/PacketError/PacketError.cpp
     src/errors/PacketError/PacketError.hpp
+    src/errors/SerializationError/SerializationError.cpp
+    src/errors/SerializationError/SerializationError.hpp
     src/networking/Address/Address.hpp
     src/networking/Address/Address.unix.cpp
     src/networking/Address/Address.win.cpp
@@ -53,8 +57,8 @@ set(PROTECS_SOURCES
     src/networking/Packet/Packet.hpp
     src/networking/packets/EntityAddComponent/EntityAddComponent.cpp
     src/networking/packets/EntityAddComponent/EntityAddComponent.hpp
-    src/networking/packets/EntityPosition/EntityPosition.cpp
-    src/networking/packets/EntityPosition/EntityPosition.hpp
+    src/networking/packets/EntityComponentData/EntityComponentData.cpp
+    src/networking/packets/EntityComponentData/EntityComponentData.hpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.cpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.cpp
