@@ -20,5 +20,7 @@ namespace Protecs::Networking::Packets {
 
         void serialize(std::span<std::uint8_t> output) const noexcept;
         static EntityRemoveComponent deserialize(std::span<const std::uint8_t> input) noexcept;
+
+        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(entity) + sizeof(componentType); }
     };
 }
