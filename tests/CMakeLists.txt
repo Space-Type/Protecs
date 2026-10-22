@@ -24,6 +24,7 @@ set(TEST_SOURCES
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
+    systems/Motion.cpp
     utils/Memory.cpp)
 
 if (WIN32)
