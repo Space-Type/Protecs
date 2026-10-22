@@ -31,6 +31,7 @@ namespace Protecs::Utils {
         Num y;
 
         constexpr Vec2D(Num x, Num y) noexcept : x(x) , y(y) {}
+        constexpr Vec2D() noexcept : x(0) , y(0) {}
 
         [[ nodiscard ]] constexpr double sqrMagnitude() const
         {
