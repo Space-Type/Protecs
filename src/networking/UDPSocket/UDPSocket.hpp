@@ -54,8 +54,7 @@ namespace Protecs::Networking {
             template <typename T>
             bool send(const T& data, const Address& dest) noexcept { return sendBytes(reinterpret_cast<const char*>(&data), sizeof(T), dest); }
 
-            template <>
-            bool send<Packet>(const Packet& packet, const Address& dest) noexcept
+            inline bool send(const Packet& packet, const Address& dest) noexcept
             {
                 return sendBytes(reinterpret_cast<const char*>(packet.raw.data()), packet.filled, dest);
             }
@@ -72,10 +71,9 @@ namespace Protecs::Networking {
             template <typename T>
             std::size_t receive(T& data, Address* sender = nullptr) noexcept { return receiveBytes(reinterpret_cast<char*>(&data), sizeof(T), sender); }
 
-            template <>
-            std::size_t receive<Packet>(Packet& packet, Address* sender) noexcept
+            inline std::size_t receive(Packet& packet, Address* sender = nullptr) noexcept
             {
-                auto packetSize = receive(packet.raw, sender);
+                auto packetSize = receiveBytes(reinterpret_cast<char*>(packet.raw.data()), packet.raw.size(), sender);
                 packet.filled = packetSize;
                 return packetSize;
             }
