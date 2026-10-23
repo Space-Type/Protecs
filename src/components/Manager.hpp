@@ -15,7 +15,8 @@
 
 
 namespace Protecs::Components {
-    using Manager = Wrecks::ECS::ComponentManager<Transform,
+    using Manager = Wrecks::ECS::ComponentManager<Level,
+                                                  Transform,
                                                   Velocity>;
 
     using Variant = Wrecks::Utils::replace_container_type_t<std::variant<>, Manager>;

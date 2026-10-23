@@ -37,6 +37,8 @@ endif()
 
 
 set(PROTECS_SOURCES
+    src/components/Level/Level.cpp
+    src/components/Level/Level.hpp
     src/components/Transform/Transform.cpp
     src/components/Transform/Transform.hpp
     src/components/Velocity/Velocity.cpp
