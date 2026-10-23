@@ -68,6 +68,7 @@ Protecs::Components::Variant deserializeComponent(std::size_t type, std::span<co
     const auto* current = input.data();
 
     switch (type) {
+        case index_of(Level):     return Protecs::Components::Level::deserialize(current, input.size());
         case index_of(Transform): return Protecs::Components::Transform::deserialize(current, input.size());
         case index_of(Velocity):  return Protecs::Components::Velocity::deserialize(current, input.size());
 
