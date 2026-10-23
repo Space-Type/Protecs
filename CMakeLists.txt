@@ -100,8 +100,8 @@ endif()
 list(FILTER PROTECS_SOURCES EXCLUDE REGEX "\\.${EXCLUDED_PLATFORM}\\.[ch]pp$")
 
 add_library(protecs STATIC ${PROTECS_SOURCES})
-target_include_directories(protecs PUBLIC include
-                                   PUBLIC lib/wrecks/include)
+target_include_directories(protecs PUBLIC  include
+                                   PRIVATE lib/wrecks/include)
 target_link_libraries(protecs wrecks)
 
 if (WIN32)
