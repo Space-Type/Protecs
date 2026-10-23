@@ -73,6 +73,8 @@ set(PROTECS_SOURCES
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.hpp
     src/networking/packets/Ping/Ping.cpp
     src/networking/packets/Ping/Ping.hpp
+    src/networking/packets/PlayerId/PlayerId.cpp
+    src/networking/packets/PlayerId/PlayerId.hpp
     src/networking/packets/PlayerInput/PlayerInput.cpp
     src/networking/packets/PlayerInput/PlayerInput.hpp
     src/networking/packets/PlayerJoin/PlayerJoin.cpp

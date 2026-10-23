@@ -75,6 +75,10 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = Packets::Ping::deserialize(std::span(dataStart, dataEnd));
             break;
 
+        case index_of(PlayerId):
+            result = Packets::PlayerId::deserialize(std::span(dataStart, dataEnd));
+            break;
+
         case index_of(PlayerInput):
             result = Packets::PlayerInput::deserialize(std::span(dataStart, dataEnd));
             break;
