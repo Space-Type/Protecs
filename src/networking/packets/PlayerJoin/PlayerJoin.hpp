@@ -15,6 +15,19 @@
 
 
 namespace Protecs::Networking::Packets {
+    /**
+     * Asks the server if the sender
+     * can join the game as a player.
+     *
+     * If successful, the server will
+     * reply with a PlayerId packet.
+     * Otherwise, a PlayerLeave packet
+     * will be sent back.
+     *
+     * Sending a PlayerJoin packet as
+     * a player who already joined has
+     * no effect.
+     */
     struct PlayerJoin {
         std::uint8_t length;
         std::array<char, 32> name;

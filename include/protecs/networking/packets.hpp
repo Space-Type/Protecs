@@ -16,6 +16,7 @@
 #include "../../../src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp"
 #include "../../../src/networking/packets/EntitySyncComponents/EntitySyncComponents.hpp"
 #include "../../../src/networking/packets/Ping/Ping.hpp"
+#include "../../../src/networking/packets/PlayerId/PlayerId.hpp"
 #include "../../../src/networking/packets/PlayerInput/PlayerInput.hpp"
 #include "../../../src/networking/packets/PlayerJoin/PlayerJoin.hpp"
 #include "../../../src/networking/packets/PlayerLeave/PlayerLeave.hpp"
