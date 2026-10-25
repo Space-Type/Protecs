@@ -7,11 +7,12 @@
 */
 
 #include "Motion.hpp"
-#include <algorithm>
 
 
 static constexpr float FRICTION_FACTOR_X = 0.90;
 static constexpr float FRICTION_FACTOR_Y = FRICTION_FACTOR_X;
+static constexpr Protecs::Utils::Vec2D<float> POSITION_MIN = { 0.f, 0.f };
+static constexpr Protecs::Utils::Vec2D<float> POSITION_MAX = { Protecs::POSITION_MAX_X, Protecs::POSITION_MAX_Y };
 
 
 Protecs::Systems::Motion::Motion() noexcept
@@ -21,15 +22,13 @@ Protecs::Systems::Motion::Motion() noexcept
 
 }
 
-void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity)
+void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity, Wrecks::DeltaTime)
 {
     auto& velocity = m_GetTransform(entity);
     auto& transform = m_GetVelocity(entity);
 
     transform.position += velocity.position;
-
-    transform.position.x = std::clamp(transform.position.x, 0.f, POSITION_MAX_X);
-    transform.position.y = std::clamp(transform.position.y, 0.f, POSITION_MAX_Y);
+    transform.position.clamp(POSITION_MIN, POSITION_MAX);
 
     velocity.position.x *= FRICTION_FACTOR_X;
     velocity.position.y *= FRICTION_FACTOR_Y;
