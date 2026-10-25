@@ -37,6 +37,8 @@ endif()
 
 
 set(PROTECS_SOURCES
+    src/components/EnemyPathFinding/EnemyPathFinding.cpp
+    src/components/EnemyPathFinding/EnemyPathFinding.hpp
     src/components/Level/Level.cpp
     src/components/Level/Level.hpp
     src/components/Transform/Transform.cpp
