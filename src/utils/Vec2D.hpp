@@ -30,9 +30,6 @@ namespace Protecs::Utils {
         Num x;
         Num y;
 
-        constexpr Vec2D(Num x, Num y) noexcept : x(x) , y(y) {}
-        constexpr Vec2D() noexcept : x(0) , y(0) {}
-
         [[ nodiscard ]] constexpr double sqrMagnitude() const
         {
             return
@@ -124,14 +121,14 @@ namespace Protecs::Utils {
     };
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::UP    {  0, -1 };  // y axis inverted for screens
+    inline constexpr Vec2D<T> Vec2D<T>::UP    = {  0, -1 };  // y axis inverted for screens
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::DOWN  {  0,  1 };
+    inline constexpr Vec2D<T> Vec2D<T>::DOWN  = {  0,  1 };
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::LEFT  { -1,  0 };
+    inline constexpr Vec2D<T> Vec2D<T>::LEFT  = { -1,  0 };
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::RIGHT {  1,  0 };
+    inline constexpr Vec2D<T> Vec2D<T>::RIGHT = {  1,  0 };
 }
