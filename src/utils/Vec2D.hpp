@@ -27,9 +27,21 @@ namespace Protecs::Utils {
         static const Vec2D DOWN;
         static const Vec2D LEFT;
         static const Vec2D RIGHT;
+        static const Vec2D ZERO;
+
+        static constexpr Num NEAR_ZERO = 0.0000001;
 
         Num x;
         Num y;
+
+        [[ nodiscard ]] constexpr bool null() const noexcept requires (std::is_integral_v<Num>) { return x == 0 && y == 0; }
+        [[ nodiscard ]] constexpr bool null() const noexcept
+            requires (std::is_floating_point_v<Num>)
+        {
+            return
+                (-NEAR_ZERO < x && x < NEAR_ZERO) &&
+                (-NEAR_ZERO < y && y < NEAR_ZERO);
+        }
 
         [[ nodiscard ]] constexpr double sqrMagnitude() const
         {
@@ -53,7 +65,11 @@ namespace Protecs::Utils {
         [[ nodiscard ]] double distance(const Vec2D<OT>& other) noexcept { return std::sqrt(sqrDistance(other)); }
 
         [[ nodiscard ]] Vec2D normalized() const { return Vec2D(*this).normalize(); }
-        Vec2D& normalize() { return *this /= magnitude(); }
+        Vec2D& normalize() noexcept
+        {
+            if (null()) return *this;  // null vector is already normalized
+            return *this /= magnitude();
+        }
 
         template <NumberType OT1, NumberType OT2>
         [[ nodiscard ]] constexpr Vec2D clamped(const Vec2D<OT1>& min, const Vec2D<OT2>& max) noexcept { return Vec2D(*this).clamp(min, max); }
@@ -146,4 +162,7 @@ namespace Protecs::Utils {
 
     template <NumberType T>
     inline constexpr Vec2D<T> Vec2D<T>::RIGHT = {  1,  0 };
+
+    template <NumberType T>
+    inline constexpr Vec2D<T> Vec2D<T>::ZERO  = {  0,  0 };
 }
