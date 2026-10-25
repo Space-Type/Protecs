@@ -54,6 +54,12 @@ namespace Protecs::Utils {
         template <NumberType OT>
         [[ nodiscard ]] double distance(const Vec2D<OT>& other) noexcept { return std::sqrt(sqrDistance(other)); }
 
+        [[ nodiscard ]] Vec2D normalized() const { return Vec2D(*this).normalize(); }
+        Vec2D& normalize() { return *this /= magnitude(); }
+
+        template <NumberType OT>
+        [[ nodiscard ]] constexpr Vec2D operator+(const Vec2D<OT>& other) const noexcept { return Vec2D(*this) += other; }
+
         template <NumberType OT>
         constexpr Vec2D& operator+=(const Vec2D<OT>& other) noexcept
         {
@@ -63,6 +69,9 @@ namespace Protecs::Utils {
         }
 
         template <NumberType OT>
+        [[ nodiscard ]] constexpr Vec2D operator-(const Vec2D<OT>& other) const noexcept { return Vec2D(*this) -= other; }
+
+        template <NumberType OT>
         constexpr Vec2D& operator-=(const Vec2D<OT>& other) noexcept
         {
             x -= static_cast<Num>(other.x);
@@ -70,6 +79,7 @@ namespace Protecs::Utils {
             return *this;
         }
 
+        [[ nodiscard ]] constexpr Vec2D operator*(Num factor) const noexcept { return Vec2D(*this) *= factor; }
         constexpr Vec2D& operator*=(Num factor) noexcept
         {
             x *= factor;
@@ -77,21 +87,13 @@ namespace Protecs::Utils {
             return *this;
         }
 
+        [[ nodiscard ]] constexpr Vec2D operator/(Num factor) const noexcept { return Vec2D(*this) /= factor; }
         constexpr Vec2D& operator/=(Num factor) noexcept
         {
             x /= factor;
             y /= factor;
             return *this;
         }
-
-        template <NumberType OT>
-        [[ nodiscard ]] constexpr Vec2D operator+(const Vec2D<OT>& other) const noexcept { return Vec2D(*this) += other; }
-
-        template <NumberType OT>
-        [[ nodiscard ]] constexpr Vec2D operator-(const Vec2D<OT>& other) const noexcept { return Vec2D(*this) -= other; }
-
-        [[ nodiscard ]] constexpr Vec2D operator*(Num factor) const noexcept { return Vec2D(*this) *= factor; }
-        [[ nodiscard ]] constexpr Vec2D operator/(Num factor) const noexcept { return Vec2D(*this) /= factor; }
 
         template <NumberType OT>
         constexpr void operator=(const Vec2D<OT>& other)
@@ -122,13 +124,13 @@ namespace Protecs::Utils {
     };
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::UP {  0, -1 };  // y axis inverted for screens
+    inline constexpr Vec2D<T> Vec2D<T>::UP    {  0, -1 };  // y axis inverted for screens
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::DOWN {  0,  1 };
+    inline constexpr Vec2D<T> Vec2D<T>::DOWN  {  0,  1 };
 
     template <NumberType T>
-    inline constexpr Vec2D<T> Vec2D<T>::LEFT { -1,  0 };
+    inline constexpr Vec2D<T> Vec2D<T>::LEFT  { -1,  0 };
 
     template <NumberType T>
     inline constexpr Vec2D<T> Vec2D<T>::RIGHT {  1,  0 };
