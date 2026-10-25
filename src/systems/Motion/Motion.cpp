@@ -24,8 +24,8 @@ Protecs::Systems::Motion::Motion() noexcept
 
 void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity, Wrecks::DeltaTime)
 {
-    auto& velocity = m_GetTransform(entity);
-    auto& transform = m_GetVelocity(entity);
+    auto& transform = m_GetTransform(entity);
+    auto& velocity = m_GetVelocity(entity);
 
     transform.position += velocity.position;
     transform.position.clamp(POSITION_MIN, POSITION_MAX);
