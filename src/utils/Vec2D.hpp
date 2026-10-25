@@ -9,6 +9,7 @@
 #pragma once
 
 #include <type_traits>
+#include <algorithm>
 #include <cmath>
 
 
@@ -53,6 +54,20 @@ namespace Protecs::Utils {
 
         [[ nodiscard ]] Vec2D normalized() const { return Vec2D(*this).normalize(); }
         Vec2D& normalize() { return *this /= magnitude(); }
+
+        template <NumberType OT1, NumberType OT2>
+        [[ nodiscard ]] constexpr Vec2D clamped(const Vec2D<OT1>& min, const Vec2D<OT2>& max) noexcept { return Vec2D(*this).clamp(min, max); }
+
+        /**
+         * Component-wise clamping function.
+         */
+        template <NumberType OT1, NumberType OT2>
+        constexpr Vec2D& clamp(const Vec2D<OT1>& min, const Vec2D<OT2>& max) noexcept
+        {
+           x = std::clamp(x, static_cast<Num>(min.x), static_cast<Num>(max.x));
+           y = std::clamp(y, static_cast<Num>(min.y), static_cast<Num>(max.y));
+           return *this;
+        }
 
         template <NumberType OT>
         [[ nodiscard ]] constexpr Vec2D operator+(const Vec2D<OT>& other) const noexcept { return Vec2D(*this) += other; }
