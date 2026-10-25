@@ -20,7 +20,10 @@ namespace Protecs::Systems {
         std::function<Components::Velocity&(Wrecks::ECS::Entity entity)> m_GetVelocity;
 
         public:
-            static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = { .stage = Wrecks::ECS::SystemAttributes::STATE };
+            static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = {
+                .stage = Wrecks::ECS::SystemAttributes::STATE,
+                .order = 10  // give enough space for other systems
+            };
 
         public:
             Motion() noexcept;
