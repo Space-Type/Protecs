@@ -13,6 +13,7 @@
 
 using Engine = Wrecks::ECS::Engine<Protecs::Systems::Tuple, Protecs::Components::Manager>;
 
+
 TEST(systems_Motion, systemWorks)
 {
     Engine engine;
@@ -21,5 +22,5 @@ TEST(systems_Motion, systemWorks)
     engine.addComponent(entity, Protecs::Components::Transform{});
     engine.addComponent(entity, Protecs::Components::Velocity{});
 
-    engine.update();
+    engine.fixedUpdate(Wrecks::DeltaTime(0));
 }
