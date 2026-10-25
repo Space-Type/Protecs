@@ -21,7 +21,7 @@ namespace Protecs::Systems {
 
         public:
             static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = {
-                .stage = Wrecks::ECS::SystemAttributes::STATE,
+                .stage = Wrecks::ECS::SystemAttributes::FIXED_UPDATE,
                 .order = 10  // give enough space for other systems
             };
 
@@ -42,6 +42,6 @@ namespace Protecs::Systems {
                 m_GetVelocity = [=](Wrecks::ECS::Entity entity) noexcept  -> Components::Velocity&{ return engine->template get<Components::Velocity>()[entity]; };
             }
 
-            void operator()(Wrecks::ECS::Entity entity);
+            void operator()(Wrecks::ECS::Entity entity, Wrecks::DeltaTime dt);
     };
 }
