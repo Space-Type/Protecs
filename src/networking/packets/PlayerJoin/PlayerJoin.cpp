@@ -12,6 +12,17 @@
 #include <algorithm>
 
 
+auto Protecs::Networking::Packets::PlayerJoin::fromStr(std::string_view name) -> PlayerJoin
+{
+    PlayerJoin data;
+
+    name = name.substr(0, data.name.size());
+    std::copy(name.begin(), name.end(), data.name.begin());
+    data.length = name.length();
+
+    return data;
+}
+
 auto Protecs::Networking::Packets::PlayerJoin::str() const -> std::string_view
 {
     return std::string_view(name.data(), static_cast<std::size_t>(length));
