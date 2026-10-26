@@ -32,6 +32,7 @@ namespace Protecs::Networking::Packets {
         std::uint8_t length;
         std::array<char, 32> name;
 
+        static PlayerJoin fromStr(std::string_view name);
         std::string_view str() const;
 
         void serialize(std::span<std::uint8_t> output) const;

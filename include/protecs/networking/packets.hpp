@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include "../../../src/networking/packets/EntityAddComponent/EntityAddComponent.hpp"
 #include "../../../src/networking/packets/EntityComponentData/EntityComponentData.hpp"
 #include "../../../src/networking/packets/EntityCreate/EntityCreate.hpp"
 #include "../../../src/networking/packets/EntityDelete/EntityDelete.hpp"

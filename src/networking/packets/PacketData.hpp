@@ -13,8 +13,7 @@
 
 
 namespace Protecs::Networking::Packets {
-    using PacketData = std::variant<EntityAddComponent,
-                                    EntityComponentData,
+    using PacketData = std::variant<EntityComponentData,
                                     EntityCreate,
                                     EntityDelete,
                                     EntityRemoveComponent,
