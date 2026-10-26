@@ -47,10 +47,6 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
     ++dataStart;
 
     switch (type) {
-        case index_of(EntityAddComponent):
-            result = Packets::EntityAddComponent::deserialize(std::span(dataStart, dataEnd));
-            break;
-
         case index_of(EntityComponentData):
             result = Packets::EntityComponentData::deserialize(std::span(dataStart, dataEnd));
             break;
