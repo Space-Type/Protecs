@@ -89,6 +89,8 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.win.cpp
     src/systems/Motion/Motion.cpp
     src/systems/Motion/Motion.hpp
+    src/systems/PathFinding/PathFinding.cpp
+    src/systems/PathFinding/PathFinding.hpp
     src/systems/Tuple.hpp
     src/utils/Memory.hpp
     src/utils/Vec2D.hpp)

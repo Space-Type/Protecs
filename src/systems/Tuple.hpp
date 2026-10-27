@@ -12,5 +12,6 @@
 
 
 namespace Protecs::Systems {
-    using Tuple = std::tuple<Motion>;
+    using Tuple = std::tuple<Motion,
+                             PathFinding>;
 }
