@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "../../../src/components/EnemyPathFinding/EnemyPathFinding.hpp"
 #include "../../../src/components/Level/Level.hpp"
+#include "../../../src/components/PathFinding/PathFinding.hpp"
 #include "../../../src/components/Transform/Transform.hpp"
 #include "../../../src/components/Velocity/Velocity.hpp"

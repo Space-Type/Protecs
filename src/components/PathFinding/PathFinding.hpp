@@ -3,7 +3,7 @@
 ** Project - Protecs
 ** File description:
 ** Header file for
-** EnemyPathFinding component
+** PathFinding component
 */
 
 #pragma once
@@ -13,7 +13,7 @@
 
 
 namespace Protecs::Components {
-    struct EnemyPathFinding {
+    struct PathFinding {
         enum PathFindingType : std::uint8_t {
             STRAIGHT = 0,
         };
@@ -21,7 +21,7 @@ namespace Protecs::Components {
         PathFindingType type;
 
         void serialize(std::uint8_t*& output, std::size_t size) const;
-        static EnemyPathFinding deserialize(const std::uint8_t*& data, std::size_t size);
+        static PathFinding deserialize(const std::uint8_t*& data, std::size_t size);
 
         /**
          * Returns the size (in bytes) of the

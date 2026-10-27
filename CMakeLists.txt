@@ -37,10 +37,10 @@ endif()
 
 
 set(PROTECS_SOURCES
-    src/components/EnemyPathFinding/EnemyPathFinding.cpp
-    src/components/EnemyPathFinding/EnemyPathFinding.hpp
     src/components/Level/Level.cpp
     src/components/Level/Level.hpp
+    src/components/PathFinding/PathFinding.cpp
+    src/components/PathFinding/PathFinding.hpp
     src/components/Transform/Transform.cpp
     src/components/Transform/Transform.hpp
     src/components/Velocity/Velocity.cpp
