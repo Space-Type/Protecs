@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     components/Level.cpp
+    components/PathFinding.cpp
     components/Transform.cpp
     components/Velocity.cpp
     errors/Error.cpp
@@ -29,6 +30,7 @@ set(TEST_SOURCES
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
     systems/Motion.cpp
+    systems/PathFinding.cpp
     utils/Memory.cpp)
 
 if (WIN32)

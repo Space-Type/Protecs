@@ -34,7 +34,7 @@ void Protecs::Systems::PathFinding::operator()(Wrecks::ECS::Entity entity, Wreck
 void Protecs::Systems::PathFinding::straightPathFinding(Components::PathFinding& pathfinding, Components::Velocity& velocity)
 {
     if (velocity.position.x != pathfinding.targetVelocity.x) {
-        velocity.position.x += pathfinding.acceleration * sign(pathfinding.targetVelocity.x);
+        velocity.position.x += pathfinding.acceleration * sign(pathfinding.targetVelocity.x - velocity.position.x);
         velocity.position.x = snapToDelta(velocity.position.x, pathfinding.targetVelocity.x);
     }
 
