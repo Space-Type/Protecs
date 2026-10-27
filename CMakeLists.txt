@@ -67,6 +67,8 @@ set(PROTECS_SOURCES
     src/networking/packets/EntityCreate/EntityCreate.hpp
     src/networking/packets/EntityDelete/EntityDelete.cpp
     src/networking/packets/EntityDelete/EntityDelete.hpp
+    src/networking/packets/EntityList/EntityList.cpp
+    src/networking/packets/EntityList/EntityList.hpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.cpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.cpp

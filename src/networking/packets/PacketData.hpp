@@ -16,6 +16,7 @@ namespace Protecs::Networking::Packets {
     using PacketData = std::variant<EntityComponentData,
                                     EntityCreate,
                                     EntityDelete,
+                                    EntityList,
                                     EntityRemoveComponent,
                                     EntitySyncComponents,
                                     Ping,
