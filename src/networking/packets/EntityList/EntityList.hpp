@@ -10,6 +10,7 @@
 
 #include <protecs/common.hpp>
 #include <vector>
+#include <span>
 
 
 namespace Protecs::Networking::Packets {
