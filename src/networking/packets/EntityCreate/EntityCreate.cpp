@@ -19,6 +19,7 @@ void Protecs::Networking::Packets::EntityCreate::serialize(std::span<std::uint8_
     auto* current = output.data();
 
     Utils::copyFromValue(current, id);
+    Utils::copyFromValue(current, type);
 }
 
 auto Protecs::Networking::Packets::EntityCreate::deserialize(std::span<const std::uint8_t> input) -> EntityCreate
@@ -30,5 +31,6 @@ auto Protecs::Networking::Packets::EntityCreate::deserialize(std::span<const std
 
     EntityCreate result;
     Utils::copyToValue(result.id, current);
+    Utils::copyToValue(result.type, current);
     return result;
 }

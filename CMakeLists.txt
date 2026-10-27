@@ -39,6 +39,8 @@ endif()
 set(PROTECS_SOURCES
     src/components/Level/Level.cpp
     src/components/Level/Level.hpp
+    src/components/PathFinding/PathFinding.cpp
+    src/components/PathFinding/PathFinding.hpp
     src/components/Transform/Transform.cpp
     src/components/Transform/Transform.hpp
     src/components/Velocity/Velocity.cpp
@@ -65,6 +67,8 @@ set(PROTECS_SOURCES
     src/networking/packets/EntityCreate/EntityCreate.hpp
     src/networking/packets/EntityDelete/EntityDelete.cpp
     src/networking/packets/EntityDelete/EntityDelete.hpp
+    src/networking/packets/EntityList/EntityList.cpp
+    src/networking/packets/EntityList/EntityList.hpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.cpp
     src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp
     src/networking/packets/EntitySyncComponents/EntitySyncComponents.cpp
@@ -85,6 +89,8 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.win.cpp
     src/systems/Motion/Motion.cpp
     src/systems/Motion/Motion.hpp
+    src/systems/PathFinding/PathFinding.cpp
+    src/systems/PathFinding/PathFinding.hpp
     src/systems/Tuple.hpp
     src/utils/Memory.hpp
     src/utils/Vec2D.hpp)

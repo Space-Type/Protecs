@@ -9,3 +9,4 @@
 #pragma once
 
 #include "../../../src/systems/Motion/Motion.hpp"
+#include "../../../src/systems/PathFinding/PathFinding.hpp"

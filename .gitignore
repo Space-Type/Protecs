@@ -1,6 +1,9 @@
 # CMake build directory
 build/
 
+# Coverage report
+test-coverage/
+
 # Built files (just in case)
 libprotecs.a
 *.o

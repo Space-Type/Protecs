@@ -19,7 +19,7 @@ void Protecs::Networking::Packets::EntityRemoveComponent::serialize(std::span<st
     auto* current = output.data();
 
     Utils::copyFromValue(current, entity);
-    Utils::copyFromValue(current, componentType);
+    Utils::copyFromValue(current, type);
 }
 
 auto Protecs::Networking::Packets::EntityRemoveComponent::deserialize(std::span<const std::uint8_t> input) -> EntityRemoveComponent
@@ -31,7 +31,7 @@ auto Protecs::Networking::Packets::EntityRemoveComponent::deserialize(std::span<
     EntityRemoveComponent result;
 
     Utils::copyToValue(result.entity, current);
-    Utils::copyToValue(result.componentType, current);
+    Utils::copyToValue(result.type, current);
 
     return result;
 }

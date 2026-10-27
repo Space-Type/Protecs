@@ -34,7 +34,7 @@ auto Protecs::Networking::Address::host() const noexcept -> std::string_view
     const char* res = ::inet_ntop(AF_INET, &sin_addr, hostname, hostSize - 1);
 
     return res
-        ? hostname
+        ? hostname // GCOVR_EXCL_BR_LINE (can only be true if inet_ntop doesn't support AF_INET)
         : "<unknown host>";
 }
 

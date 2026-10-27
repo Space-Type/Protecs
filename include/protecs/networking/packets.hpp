@@ -12,6 +12,7 @@
 #include "../../../src/networking/packets/EntityComponentData/EntityComponentData.hpp"
 #include "../../../src/networking/packets/EntityCreate/EntityCreate.hpp"
 #include "../../../src/networking/packets/EntityDelete/EntityDelete.hpp"
+#include "../../../src/networking/packets/EntityList/EntityList.hpp"
 #include "../../../src/networking/packets/EntityRemoveComponent/EntityRemoveComponent.hpp"
 #include "../../../src/networking/packets/EntitySyncComponents/EntitySyncComponents.hpp"
 #include "../../../src/networking/packets/Ping/Ping.hpp"
