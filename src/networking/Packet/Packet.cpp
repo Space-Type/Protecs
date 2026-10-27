@@ -32,62 +32,24 @@ auto Protecs::Networking::Packet::serialize(const Packets::PacketData& data) -> 
 }
 
 
-#define index_of(type) Wrecks::Utils::element_index_v<Packets::type, Packets::PacketData>
-
-
 auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
 {
-    Packets::PacketData result;
-
     auto dataStart = raw.cbegin();
     auto dataEnd = raw.cbegin();
     std::advance(dataEnd, filled);
 
-    std::uint8_t type = *dataStart;
+    std::uint8_t typeIndex = *dataStart;
     ++dataStart;
 
-    switch (type) {
-        case index_of(EntityComponentData):
-            result = Packets::EntityComponentData::deserialize(std::span(dataStart, dataEnd));
-            break;
+    Packets::PacketData result;
 
-        case index_of(EntityCreate):
-            result = Packets::EntityCreate::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(EntityDelete):
-            result = Packets::EntityDelete::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(EntityRemoveComponent):
-            result = Packets::EntityRemoveComponent::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(EntitySyncComponents):
-            result = Packets::EntitySyncComponents::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(Ping):
-            result = Packets::Ping::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(PlayerId):
-            result = Packets::PlayerId::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(PlayerInput):
-            result = Packets::PlayerInput::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(PlayerJoin):
-            result = Packets::PlayerJoin::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        case index_of(PlayerLeave):
-            result = Packets::PlayerLeave::deserialize(std::span(dataStart, dataEnd));
-            break;
-
-        default: throw PacketError("unknown packet data type " + std::to_string(type));
+    try {
+        Wrecks::Utils::visitType<Packets::PacketData>([&](auto type){
+            using PacketType = typename decltype(type)::type;
+            result = PacketType::deserialize(std::span(dataStart, dataEnd));
+        }, typeIndex);
+    } catch (std::out_of_range) {
+        throw PacketError("unknown packet data type " + std::to_string(typeIndex));
     }
 
     return result;
