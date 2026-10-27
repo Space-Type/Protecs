@@ -21,6 +21,9 @@ void Protecs::Components::PathFinding::serialize(std::uint8_t*& output, std::siz
         throw Protecs::SerializationError("not enough bytes in input to serialize PathFinding into output");
 
     Utils::copyFromValue(output, type);
+    Utils::copyFromValue(output, targetVelocity.x);
+    Utils::copyFromValue(output, targetVelocity.y);
+    Utils::copyFromValue(output, acceleration);
 }
 
 /**
@@ -34,5 +37,8 @@ auto Protecs::Components::PathFinding::deserialize(const std::uint8_t*& data, st
 
     PathFinding result;
     Utils::copyToValue(result.type, data);
+    Utils::copyToValue(result.targetVelocity.x, data);
+    Utils::copyToValue(result.targetVelocity.y, data);
+    Utils::copyToValue(result.acceleration, data);
     return result;
 }

@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <protecs/utils.hpp>
 #include <cstdint>
 #include <cstddef>
 
@@ -19,6 +20,8 @@ namespace Protecs::Components {
         };
 
         PathFindingType type;
+        Utils::Vec2D<float> targetVelocity;
+        float acceleration;
 
         void serialize(std::uint8_t*& output, std::size_t size) const;
         static PathFinding deserialize(const std::uint8_t*& data, std::size_t size);
@@ -31,7 +34,11 @@ namespace Protecs::Components {
          */
         [[nodiscard]] static constexpr std::size_t packedSize()
         {
-            return sizeof(type);
+            return
+                sizeof(type) +
+                sizeof(targetVelocity.x) +
+                sizeof(targetVelocity.y) +
+                sizeof(acceleration);
         }
     };
 }
