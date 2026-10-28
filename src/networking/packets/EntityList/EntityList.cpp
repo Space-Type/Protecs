@@ -18,7 +18,7 @@ void Protecs::Networking::Packets::EntityList::serialize(std::span<std::uint8_t>
 
     auto* current = output.data();
 
-    Utils::copyFromValue(current, entities.size());
+    Utils::copyFromValue(current, static_cast<std::uint32_t>(entities.size()));
     for (auto& [entity, signature] : entities) {
         Utils::copyFromValue(current, entity);
         Utils::copyFromValue(current, signature);
