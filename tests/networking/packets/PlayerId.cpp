@@ -45,7 +45,7 @@ TEST(networking_packets_PlayerId, deserialization)
     EXPECT_EQ(data.id, TEST_DATA.id);
 }
 
-TEST(networking_packetes_PlayerId, serializeAndDeserialize)
+TEST(networking_packets_PlayerId, serializeAndDeserialize)
 {
     PlayerId initialData = { .id = 8734738157 };
     PlayerId deserializedData;

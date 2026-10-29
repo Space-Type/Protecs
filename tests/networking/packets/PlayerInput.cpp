@@ -51,7 +51,7 @@ TEST(networking_packets_PlayerInput, deserialization)
     EXPECT_EQ(data.sequence, TEST_DATA.sequence);
 }
 
-TEST(networking_packetes_PlayerInput, serializeAndDeserialize)
+TEST(networking_packets_PlayerInput, serializeAndDeserialize)
 {
     PlayerInput initialData = { .input = PlayerInput::SHOOT, .state = PlayerInput::HOLD_DOWN, .sequence = 50 };
     PlayerInput deserializedData;
