@@ -26,6 +26,7 @@ set(TEST_SOURCES
     errors/NetworkError.cpp
     errors/PacketError.cpp
     networking/packets/EntityCreate.cpp
+    networking/packets/EntityDelete.cpp
     networking/packets/Ping.cpp
     networking/packets/PlayerId.cpp
     networking/packets/PlayerInput.cpp
