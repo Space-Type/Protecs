@@ -70,7 +70,9 @@ TEST(networking_packets_PlayerJoin, smallBufferSerialize)
 
 TEST(networking_packets_PlayerJoin, smallBufferDeserialize)
 {
-    std::uint8_t buffer[1] = { 'c' };
+    std::span<std::uint8_t> buffer1;
+    std::uint8_t buffer2[1] = { 'c' };
 
-    EXPECT_THROW(PlayerJoin::deserialize(buffer), Protecs::SerializationError);
+    EXPECT_THROW(PlayerJoin::deserialize(buffer1), Protecs::SerializationError);
+    EXPECT_THROW(PlayerJoin::deserialize(buffer2), Protecs::SerializationError);
 }
