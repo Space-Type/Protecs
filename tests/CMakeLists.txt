@@ -25,6 +25,7 @@ set(TEST_SOURCES
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp
+    networking/packets/PlayerInput.cpp
     networking/Address.cpp
     networking/NetworkEntity.cpp
     networking/UDPSocket.cpp
