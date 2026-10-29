@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     components/Level.cpp
+    components/Movement.cpp
     components/PathFinding.cpp
     components/PlayerStats.cpp
     components/Transform.cpp
