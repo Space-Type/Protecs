@@ -74,6 +74,6 @@ Protecs::Components::Variant deserializeComponent(std::size_t type, std::span<co
         case index_of(Transform):   return Protecs::Components::Transform::deserialize(current, input.size());
         case index_of(Velocity):    return Protecs::Components::Velocity::deserialize(current, input.size());
 
-        default: throw Protecs::PacketError("unknown component type in entity component data packet");
+        default: throw Protecs::SerializationError("unknown component type in entity component data packet");
     }
 }

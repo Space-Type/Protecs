@@ -25,8 +25,20 @@ set(TEST_SOURCES
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp
+    networking/packets/EntityComponentData.cpp
+    networking/packets/EntityCreate.cpp
+    networking/packets/EntityDelete.cpp
+    networking/packets/EntityList.cpp
+    networking/packets/EntityRemoveComponent.cpp
+    networking/packets/EntitySyncComponents.cpp
+    networking/packets/Ping.cpp
+    networking/packets/PlayerId.cpp
+    networking/packets/PlayerInput.cpp
+    networking/packets/PlayerJoin.cpp
+    networking/packets/PlayerLeave.cpp
     networking/Address.cpp
     networking/NetworkEntity.cpp
+    networking/Packet.cpp
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp

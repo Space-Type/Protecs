@@ -16,10 +16,11 @@ namespace Protecs::Networking::Packets {
     struct PlayerInput {
         enum : std::uint8_t { UP, DOWN, LEFT, RIGHT, SHOOT } input;
         enum : std::uint8_t { HOLD_DOWN, RELEASE } state;
+        std::uint8_t sequence;
 
         void serialize(std::span<std::uint8_t> output) const;
         static PlayerInput deserialize(std::span<const std::uint8_t> input);
 
-        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(input) + sizeof(state); }
+        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(input) + sizeof(state) + sizeof(sequence); }
     };
 }

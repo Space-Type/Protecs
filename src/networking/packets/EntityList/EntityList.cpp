@@ -34,6 +34,8 @@ auto Protecs::Networking::Packets::EntityList::deserialize(std::span<const std::
 
     std::uint32_t entityCount;
     Utils::copyToValue(entityCount, current);
+    if (entityCount == 0)
+        return EntityList{};
 
     if (input.size() - sizeof(std::uint32_t) < (sizeof(NetworkEntity) + sizeof(Signature)) * entityCount)
         throw SerializationError("unable to deserialize EntityList packet as the input buffer is too small");

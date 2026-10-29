@@ -73,22 +73,3 @@ TEST(components_PlayerStats, smallBufferDeserialize)
 
     EXPECT_THROW(PlayerStats::deserialize(buffer, sizeof(SERIALIZED_TEST_DATA) - 1), Protecs::SerializationError);
 }
-
-TEST(components_PlayerStats, entityComponentData)
-{
-    namespace Packets = Protecs::Networking::Packets;
-
-    Packets::EntityComponentData packet = { .entity = 42, .component = TEST_DATA };
-    std::vector<std::uint8_t> store(packet.packedSize());
-    Packets::EntityComponentData result;
-
-    EXPECT_NO_THROW(packet.serialize(store));
-    EXPECT_NO_THROW(result = Packets::EntityComponentData::deserialize(store));
-    ASSERT_TRUE(std::holds_alternative<PlayerStats>(result.component));
-
-    const auto& stats = std::get<PlayerStats>(result.component);
-    EXPECT_EQ(result.entity, packet.entity);
-    EXPECT_EQ(stats.slot, TEST_DATA.slot);
-    EXPECT_EQ(stats.lives, TEST_DATA.lives);
-    EXPECT_EQ(stats.score, TEST_DATA.score);
-}
