@@ -28,6 +28,7 @@ set(TEST_SOURCES
     networking/packets/EntityCreate.cpp
     networking/packets/EntityDelete.cpp
     networking/packets/EntityRemoveComponent.cpp
+    networking/packets/EntitySyncComponents.cpp
     networking/packets/Ping.cpp
     networking/packets/PlayerId.cpp
     networking/packets/PlayerInput.cpp
