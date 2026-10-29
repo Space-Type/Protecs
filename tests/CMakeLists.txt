@@ -19,6 +19,7 @@ FetchContent_MakeAvailable(googletest)
 set(TEST_SOURCES
     components/Level.cpp
     components/PathFinding.cpp
+    components/PlayerStats.cpp
     components/Transform.cpp
     components/Velocity.cpp
     errors/Error.cpp
