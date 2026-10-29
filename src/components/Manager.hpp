@@ -16,6 +16,7 @@
 
 namespace Protecs::Components {
     using Manager = Wrecks::ECS::ComponentManager<Level,
+                                                  Movement,
                                                   PathFinding,
                                                   PlayerStats,
                                                   Transform,

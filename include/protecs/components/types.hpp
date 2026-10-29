@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../../../src/components/Level/Level.hpp"
+#include "../../../src/components/Movement/Movement.hpp"
 #include "../../../src/components/PathFinding/PathFinding.hpp"
 #include "../../../src/components/PlayerStats/PlayerStats.hpp"
 #include "../../../src/components/Transform/Transform.hpp"

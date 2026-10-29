@@ -39,6 +39,8 @@ endif()
 set(PROTECS_SOURCES
     src/components/Level/Level.cpp
     src/components/Level/Level.hpp
+    src/components/Movement/Movement.cpp
+    src/components/Movement/Movement.hpp
     src/components/PathFinding/PathFinding.cpp
     src/components/PathFinding/PathFinding.hpp
     src/components/PlayerStats/PlayerStats.cpp
