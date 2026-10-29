@@ -41,6 +41,8 @@ set(PROTECS_SOURCES
     src/components/Level/Level.hpp
     src/components/PathFinding/PathFinding.cpp
     src/components/PathFinding/PathFinding.hpp
+    src/components/PlayerStats/PlayerStats.cpp
+    src/components/PlayerStats/PlayerStats.hpp
     src/components/Transform/Transform.cpp
     src/components/Transform/Transform.hpp
     src/components/Velocity/Velocity.cpp
