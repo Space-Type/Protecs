@@ -93,6 +93,8 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.win.cpp
     src/systems/Motion/Motion.cpp
     src/systems/Motion/Motion.hpp
+    src/systems/Movement/Movement.cpp
+    src/systems/Movement/Movement.hpp
     src/systems/PathFinding/PathFinding.cpp
     src/systems/PathFinding/PathFinding.hpp
     src/systems/Tuple.hpp
