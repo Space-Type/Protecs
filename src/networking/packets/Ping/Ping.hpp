@@ -28,6 +28,6 @@ namespace Protecs::Networking::Packets {
         constexpr static void serialize(std::span<std::uint8_t> output) {}
         constexpr static Ping deserialize(std::span<const std::uint8_t> input) noexcept { return Ping{}; }
 
-        [[nodiscard]] constexpr std::size_t packedSize() const noexcept { return 0; }
+        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return 0; }
     };
 }
