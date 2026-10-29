@@ -25,6 +25,7 @@ set(TEST_SOURCES
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp
+    networking/packets/EntityComponentData.cpp
     networking/packets/EntityCreate.cpp
     networking/packets/EntityDelete.cpp
     networking/packets/EntityList.cpp

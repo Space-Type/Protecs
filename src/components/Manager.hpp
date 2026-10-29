@@ -17,9 +17,9 @@
 namespace Protecs::Components {
     using Manager = Wrecks::ECS::ComponentManager<Level,
                                                   PathFinding,
+                                                  PlayerStats,
                                                   Transform,
-                                                  Velocity,
-                                                  PlayerStats>;
+                                                  Velocity>;
 
     using Variant = Wrecks::Utils::replace_container_type_t<std::variant<>, Manager>;
 }
