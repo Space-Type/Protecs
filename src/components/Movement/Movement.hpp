@@ -13,8 +13,8 @@
 
 namespace Protecs::Components {
     struct Movement {
-        Utils::Vec2D<float> position;
-        float angular;
+        Utils::Vec2D<float> direction;
+        float speed;
 
         void serialize(std::uint8_t*& output, std::size_t size) const;
         static Movement deserialize(const std::uint8_t*& data, std::size_t size);
@@ -28,9 +28,9 @@ namespace Protecs::Components {
         [[nodiscard]] static constexpr std::size_t packedSize()
         {
             return
-                sizeof(position.x) +
-                sizeof(position.y) +
-                sizeof(angular);
+                sizeof(direction.x) +
+                sizeof(direction.y) +
+                sizeof(speed);
         }
     };
 }

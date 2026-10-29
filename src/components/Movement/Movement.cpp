@@ -20,9 +20,9 @@ void Protecs::Components::Movement::serialize(std::uint8_t*& output, std::size_t
     if (size < Movement::packedSize())
         throw Protecs::SerializationError("not enough bytes in input to serialize Movement into output");
 
-    Utils::copyFromValue(output, position.x);
-    Utils::copyFromValue(output, position.y);
-    Utils::copyFromValue(output, angular);
+    Utils::copyFromValue(output, direction.x);
+    Utils::copyFromValue(output, direction.y);
+    Utils::copyFromValue(output, speed);
 }
 
 /**
@@ -36,9 +36,9 @@ auto Protecs::Components::Movement::deserialize(const std::uint8_t*& data, std::
 
     Movement result;
 
-    Utils::copyToValue(result.position.x, data);
-    Utils::copyToValue(result.position.y, data);
-    Utils::copyToValue(result.angular, data);
+    Utils::copyToValue(result.direction.x, data);
+    Utils::copyToValue(result.direction.y, data);
+    Utils::copyToValue(result.speed, data);
 
     return result;
 }
