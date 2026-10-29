@@ -27,6 +27,7 @@ set(TEST_SOURCES
     errors/PacketError.cpp
     networking/packets/EntityCreate.cpp
     networking/packets/EntityDelete.cpp
+    networking/packets/EntityList.cpp
     networking/packets/EntityRemoveComponent.cpp
     networking/packets/EntitySyncComponents.cpp
     networking/packets/Ping.cpp
