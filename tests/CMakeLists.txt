@@ -25,6 +25,7 @@ set(TEST_SOURCES
     errors/Error.cpp
     errors/NetworkError.cpp
     errors/PacketError.cpp
+    networking/packets/Ping.cpp
     networking/packets/PlayerId.cpp
     networking/packets/PlayerInput.cpp
     networking/packets/PlayerJoin.cpp
