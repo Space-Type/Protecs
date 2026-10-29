@@ -38,6 +38,7 @@ set(TEST_SOURCES
     networking/packets/PlayerLeave.cpp
     networking/Address.cpp
     networking/NetworkEntity.cpp
+    networking/Packet.cpp
     networking/UDPSocket.cpp
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
