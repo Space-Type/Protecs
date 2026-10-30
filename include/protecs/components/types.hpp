@@ -11,6 +11,7 @@
 #include "../../../src/components/Level/Level.hpp"
 #include "../../../src/components/Movement/Movement.hpp"
 #include "../../../src/components/PathFinding/PathFinding.hpp"
+#include "../../../src/components/PlayerInput/PlayerInput.hpp"
 #include "../../../src/components/PlayerStats/PlayerStats.hpp"
 #include "../../../src/components/Transform/Transform.hpp"
 #include "../../../src/components/Velocity/Velocity.hpp"
