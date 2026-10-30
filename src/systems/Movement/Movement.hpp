@@ -22,7 +22,7 @@ namespace Protecs::Systems {
         public:
             static constexpr Wrecks::ECS::SystemAttributes ATTRIBUTES = {
                 .stage = Wrecks::ECS::SystemAttributes::FIXED_UPDATE,
-                .order = 10
+                .order = 20
             };
 
         public:

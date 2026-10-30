@@ -99,6 +99,8 @@ set(PROTECS_SOURCES
     src/systems/Movement/Movement.hpp
     src/systems/PathFinding/PathFinding.cpp
     src/systems/PathFinding/PathFinding.hpp
+    src/systems/PlayerMovement/PlayerMovement.cpp
+    src/systems/PlayerMovement/PlayerMovement.hpp
     src/systems/Tuple.hpp
     src/utils/Memory.hpp
     src/utils/Vec2D.hpp)
