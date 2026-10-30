@@ -9,4 +9,6 @@
 #pragma once
 
 #include "../../../src/systems/Motion/Motion.hpp"
+#include "../../../src/systems/Movement/Movement.hpp"
 #include "../../../src/systems/PathFinding/PathFinding.hpp"
+#include "../../../src/systems/PlayerMovement/PlayerMovement.hpp"

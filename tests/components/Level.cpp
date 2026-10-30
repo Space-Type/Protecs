@@ -3,7 +3,7 @@
 ** Project - Protecs
 ** File description:
 ** Unit tests for
-** Transform component
+** Level component
 */
 
 #include <gtest/gtest.h>

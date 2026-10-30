@@ -14,7 +14,7 @@
 
 namespace Protecs::Networking::Packets {
     struct PlayerInput {
-        enum : std::uint8_t { UP, DOWN, LEFT, RIGHT, SHOOT } input;
+        enum : std::uint8_t { UP, DOWN, LEFT, RIGHT, TRIGGER } input;
         enum : std::uint8_t { HOLD_DOWN, RELEASE } state;
         std::uint8_t sequence;
 

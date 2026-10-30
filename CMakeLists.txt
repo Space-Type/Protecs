@@ -39,8 +39,12 @@ endif()
 set(PROTECS_SOURCES
     src/components/Level/Level.cpp
     src/components/Level/Level.hpp
+    src/components/Movement/Movement.cpp
+    src/components/Movement/Movement.hpp
     src/components/PathFinding/PathFinding.cpp
     src/components/PathFinding/PathFinding.hpp
+    src/components/PlayerInput/PlayerInput.cpp
+    src/components/PlayerInput/PlayerInput.hpp
     src/components/PlayerStats/PlayerStats.cpp
     src/components/PlayerStats/PlayerStats.hpp
     src/components/Transform/Transform.cpp
@@ -91,8 +95,12 @@ set(PROTECS_SOURCES
     src/networking/UDPSocket/UDPSocket.win.cpp
     src/systems/Motion/Motion.cpp
     src/systems/Motion/Motion.hpp
+    src/systems/Movement/Movement.cpp
+    src/systems/Movement/Movement.hpp
     src/systems/PathFinding/PathFinding.cpp
     src/systems/PathFinding/PathFinding.hpp
+    src/systems/PlayerMovement/PlayerMovement.cpp
+    src/systems/PlayerMovement/PlayerMovement.hpp
     src/systems/Tuple.hpp
     src/utils/Memory.hpp
     src/utils/Vec2D.hpp)

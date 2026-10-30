@@ -18,7 +18,9 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_SOURCES
     components/Level.cpp
+    components/Movement.cpp
     components/PathFinding.cpp
+    components/PlayerInput.cpp
     components/PlayerStats.cpp
     components/Transform.cpp
     components/Velocity.cpp
@@ -43,7 +45,9 @@ set(TEST_SOURCES
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
     systems/Motion.cpp
+    systems/Movement.cpp
     systems/PathFinding.cpp
+    systems/PlayerMovement.cpp
     utils/Memory.cpp)
 
 if (WIN32)
