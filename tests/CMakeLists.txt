@@ -20,6 +20,7 @@ set(TEST_SOURCES
     components/Level.cpp
     components/Movement.cpp
     components/PathFinding.cpp
+    components/PlayerInput.cpp
     components/PlayerStats.cpp
     components/Transform.cpp
     components/Velocity.cpp

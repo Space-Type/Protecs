@@ -53,7 +53,7 @@ TEST(networking_packets_PlayerInput, deserialization)
 
 TEST(networking_packets_PlayerInput, serializeAndDeserialize)
 {
-    PlayerInput initialData = { .input = PlayerInput::SHOOT, .state = PlayerInput::HOLD_DOWN, .sequence = 50 };
+    PlayerInput initialData = { .input = PlayerInput::TRIGGER, .state = PlayerInput::HOLD_DOWN, .sequence = 50 };
     PlayerInput deserializedData;
     std::uint8_t buffer[100];
 
