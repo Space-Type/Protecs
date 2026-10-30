@@ -45,7 +45,9 @@ set(TEST_SOURCES
     networking/UDPSocket.unix.cpp
     networking/UDPSocket.win.cpp
     systems/Motion.cpp
+    systems/Movement.cpp
     systems/PathFinding.cpp
+    systems/PlayerMovement.cpp
     utils/Memory.cpp)
 
 if (WIN32)
