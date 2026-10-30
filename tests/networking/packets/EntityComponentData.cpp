@@ -87,11 +87,41 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeLevel)
     EXPECT_EQ(initialData.component.index(), deserializedData.component.index());
 }
 
+TEST(networking_packets_EntityComponentData, serializeAndDeserializeMovement)
+{
+    using Protecs::Components::Movement;
+
+    EntityComponentData initialData = { .entity = 8734738157, .component = Movement{ { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData deserializedData;
+    std::uint8_t buffer[100];
+
+    EXPECT_NO_THROW(initialData.serialize(buffer));
+    EXPECT_NO_THROW(deserializedData = EntityComponentData::deserialize(buffer));
+
+    EXPECT_EQ(initialData.entity,            deserializedData.entity);
+    EXPECT_EQ(initialData.component.index(), deserializedData.component.index());
+}
+
 TEST(networking_packets_EntityComponentData, serializeAndDeserializePathFinding)
 {
     using Protecs::Components::PathFinding;
 
     EntityComponentData initialData = { .entity = 1234, .component = PathFinding{ PathFinding::STRAIGHT, { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData deserializedData;
+    std::uint8_t buffer[100];
+
+    EXPECT_NO_THROW(initialData.serialize(buffer));
+    EXPECT_NO_THROW(deserializedData = EntityComponentData::deserialize(buffer));
+
+    EXPECT_EQ(initialData.entity,            deserializedData.entity);
+    EXPECT_EQ(initialData.component.index(), deserializedData.component.index());
+}
+
+TEST(networking_packets_EntityComponentData, serializeAndDeserializePlayerInput)
+{
+    using Protecs::Components::PlayerInput;
+
+    EntityComponentData initialData = { .entity = 8734738157, .component = PlayerInput{ false, true, false, true, true } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 

@@ -63,13 +63,15 @@ auto Protecs::Networking::Packets::EntityComponentData::packedSize() const noexc
 #define index_of(type) Wrecks::Utils::element_index_v<Protecs::Components::type, Protecs::Components::Variant>
 
 
-Protecs::Components::Variant deserializeComponent(std::size_t type, std::span<const std::uint8_t> input)
+static Protecs::Components::Variant deserializeComponent(std::size_t type, std::span<const std::uint8_t> input)
 {
     const auto* current = input.data();
 
     switch (type) {
         case index_of(Level):       return Protecs::Components::Level::deserialize(current, input.size());
+        case index_of(Movement):    return Protecs::Components::Movement::deserialize(current, input.size());
         case index_of(PathFinding): return Protecs::Components::PathFinding::deserialize(current, input.size());
+        case index_of(PlayerInput): return Protecs::Components::PlayerInput::deserialize(current, input.size());
         case index_of(PlayerStats): return Protecs::Components::PlayerStats::deserialize(current, input.size());
         case index_of(Transform):   return Protecs::Components::Transform::deserialize(current, input.size());
         case index_of(Velocity):    return Protecs::Components::Velocity::deserialize(current, input.size());
