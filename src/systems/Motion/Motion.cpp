@@ -9,11 +9,9 @@
 #include "Motion.hpp"
 
 
-static constexpr float FRICTION_FACTOR_X = 0.90;
+static constexpr float FRICTION_FACTOR_X = 0.95;
 static constexpr float FRICTION_FACTOR_Y = FRICTION_FACTOR_X;
-static constexpr Protecs::Utils::Vec2D<float> POSITION_MIN = { 0.f, 0.f };
-static constexpr Protecs::Utils::Vec2D<float> POSITION_MAX = { Protecs::POSITION_MAX_X, Protecs::POSITION_MAX_Y };
-static constexpr float MIN_VELOCITY = 0.005f;  // at this velocity, the velocity turns 0.0
+static constexpr float MIN_VELOCITY = 0.0005f;  // at this velocity, the velocity turns 0.0
 
 
 Protecs::Systems::Motion::Motion() noexcept
@@ -29,7 +27,6 @@ void Protecs::Systems::Motion::operator()(Wrecks::ECS::Entity entity, Wrecks::De
     auto& velocity  = m_GetVelocity(entity);
 
     transform.position += velocity.position;
-    transform.position.clamp(POSITION_MIN, POSITION_MAX);
 
     velocity.position.x *= FRICTION_FACTOR_X;
     velocity.position.y *= FRICTION_FACTOR_Y;
