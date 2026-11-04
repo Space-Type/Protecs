@@ -15,13 +15,14 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityRemoveComponent {
+        Tick simulationTick;
         NetworkEntity entity;
         ComponentType type;
 
         void serialize(std::span<std::uint8_t> output) const;
         static EntityRemoveComponent deserialize(std::span<const std::uint8_t> input);
 
-        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(entity) + sizeof(type); }
+        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(simulationTick) + sizeof(entity) + sizeof(type); }
         [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-remove-component"; }
     };
 }
