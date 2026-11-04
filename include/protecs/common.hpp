@@ -16,6 +16,7 @@ namespace Protecs {
     using NetworkEntity = std::uint64_t;
     using ComponentType = std::uint16_t;
     using Signature = Wrecks::Signature;
+    using Tick = std::uint32_t;
 
     inline constexpr float POSITION_MAX_X = 800.f;
     inline constexpr float POSITION_MAX_Y = 450.f;

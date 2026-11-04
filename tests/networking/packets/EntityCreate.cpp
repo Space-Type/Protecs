@@ -14,11 +14,13 @@ using Protecs::Networking::Packets::EntityCreate;
 
 
 static constexpr EntityCreate TEST_DATA = {
-    .id   = 751937,
-    .type = EntityCreate::ENEMY_PATA_PATA,
+    .simulationTick = 12,
+    .id             = 751937,
+    .type           = EntityCreate::ENEMY_PATA_PATA,
 };
 
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
+    0x0c, 0x00, 0x00, 0x00,                          // simulationTick
     0x41, 0x79, 0x0b, 0x00, 0x00, 0x00, 0x00, 0x00,  // id
     EntityCreate::ENEMY_PATA_PATA,                   // type
 };
@@ -27,7 +29,7 @@ static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
 TEST(networking_packets_EntityCreate, packedSize)
 {
     EXPECT_LE(TEST_DATA.packedSize(), sizeof(TEST_DATA));
-    EXPECT_EQ(TEST_DATA.packedSize(), sizeof(TEST_DATA.id) + sizeof(TEST_DATA.type));
+    EXPECT_EQ(TEST_DATA.packedSize(), sizeof(TEST_DATA.simulationTick) + sizeof(TEST_DATA.id) + sizeof(TEST_DATA.type));
 }
 
 TEST(networking_packets_EntityCreate, serialization)
@@ -73,4 +75,9 @@ TEST(networking_packets_EntityCreate, smallBufferDeserialize)
     std::uint8_t buffer[1] = { 'c' };
 
     EXPECT_THROW(EntityCreate::deserialize(buffer), Protecs::SerializationError);
+}
+
+TEST(networking_packets_EntityCreate, packetName)
+{
+    EXPECT_EQ(EntityCreate::packetName(), "entity-create");
 }

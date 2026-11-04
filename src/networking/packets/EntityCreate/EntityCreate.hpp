@@ -22,12 +22,14 @@ namespace Protecs::Networking::Packets {
             ENEMY_SCANT,
         };
 
+        Tick simulationTick;
         NetworkEntity id;
         EntityType type;
 
         void serialize(std::span<std::uint8_t> output) const;
         static EntityCreate deserialize(std::span<const std::uint8_t> input);
 
-        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(id) + sizeof(type); }
+        [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(simulationTick) + sizeof(id) + sizeof(type); }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-create"; }
     };
 }

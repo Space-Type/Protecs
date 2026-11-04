@@ -18,6 +18,7 @@ void Protecs::Networking::Packets::EntityList::serialize(std::span<std::uint8_t>
 
     auto* current = output.data();
 
+    Utils::copyFromValue(current, simulationTick);
     Utils::copyFromValue(current, static_cast<std::uint32_t>(entities.size()));
     for (auto& [entity, signature] : entities) {
         Utils::copyFromValue(current, entity);
@@ -30,17 +31,20 @@ auto Protecs::Networking::Packets::EntityList::deserialize(std::span<const std::
     if (input.size() < partialPackedSize())
         throw SerializationError("unable to deserialize EntityList packet as the input buffer is too small");
 
+    EntityList result;
+    std::uint32_t entityCount;
+
     const auto* current = input.data();
 
-    std::uint32_t entityCount;
+    Utils::copyToValue(result.simulationTick, current);
     Utils::copyToValue(entityCount, current);
+
     if (entityCount == 0)
-        return EntityList{};
+        return result;
 
     if (input.size() - sizeof(std::uint32_t) < (sizeof(NetworkEntity) + sizeof(Signature)) * entityCount)
         throw SerializationError("unable to deserialize EntityList packet as the input buffer is too small");
 
-    EntityList result;
     result.entities.reserve(entityCount);
 
     for (std::uint32_t i = 0; i < entityCount; i++) {

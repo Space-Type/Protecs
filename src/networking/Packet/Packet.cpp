@@ -54,3 +54,25 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
 
     return result;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Protecs::Networking::Packet& packet)
+{
+    std::uint8_t typeIndex = packet.raw[0];
+    std::string_view name = packet.filled == 0
+        ? "unknown"
+        : std::string_view();
+
+    if (name.empty()) {
+        try {
+            Wrecks::Utils::visitType<Protecs::Networking::Packets::PacketData>([&](auto type){
+                using PacketType = typename decltype(type)::type;
+                name = PacketType::packetName();
+            }, typeIndex);
+        } catch (std::out_of_range) {
+            name = "unknown";
+        }
+    }
+
+    return stream << name << " packet "
+                  << "(" << packet.filled << "B)";
+}

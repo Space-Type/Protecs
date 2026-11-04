@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <string_view>
 #include <cstdint>
 #include <span>
 
@@ -38,5 +39,6 @@ namespace Protecs::Networking::Packets {
         constexpr static PlayerLeave deserialize(std::span<const std::uint8_t> input) noexcept { return PlayerLeave{}; }
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return 0; }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "player-leave"; }
     };
 }
