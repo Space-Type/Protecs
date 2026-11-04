@@ -76,3 +76,8 @@ TEST(networking_packets_PlayerJoin, smallBufferDeserialize)
     EXPECT_THROW(PlayerJoin::deserialize(buffer1), Protecs::SerializationError);
     EXPECT_THROW(PlayerJoin::deserialize(buffer2), Protecs::SerializationError);
 }
+
+TEST(networking_packets_PlayerJoin, packetName)
+{
+    EXPECT_EQ(PlayerJoin::packetName(), "player-join");
+}

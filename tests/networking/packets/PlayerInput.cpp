@@ -78,3 +78,8 @@ TEST(networking_packets_PlayerInput, smallBufferDeserialize)
 
     EXPECT_THROW(PlayerInput::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_PlayerInput, packetName)
+{
+    EXPECT_EQ(PlayerInput::packetName(), "player-input");
+}

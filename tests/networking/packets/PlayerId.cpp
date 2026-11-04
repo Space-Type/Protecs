@@ -70,3 +70,8 @@ TEST(networking_packets_PlayerId, smallBufferDeserialize)
 
     EXPECT_THROW(PlayerId::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_PlayerId, packetName)
+{
+    EXPECT_EQ(PlayerId::packetName(), "player-id");
+}

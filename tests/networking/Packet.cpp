@@ -46,3 +46,39 @@ TEST(networking_Packet, invalidPacket)
 
     EXPECT_THROW(packet.deserialize(), Protecs::PacketError);
 }
+
+TEST(networking_Packet, printPing)
+{
+    Packet packet;
+
+    packet.raw[0] = Wrecks::Utils::element_index_v<Packets::Ping, Packets::PacketData>;
+    packet.filled = sizeof(std::uint8_t) + Packets::Ping::packedSize();
+
+    std::stringstream stream;
+    stream << packet << std::flush;
+
+    EXPECT_EQ(stream.str(), "ping packet (1B)");
+}
+
+TEST(networking_Packet, printInvalidPacket)
+{
+    Packet packet;
+
+    packet.raw[0] = 255;
+    packet.filled = sizeof(std::uint8_t);
+
+    std::stringstream stream;
+    stream << packet << std::flush;
+
+    EXPECT_EQ(stream.str(), "unknown packet (1B)");
+}
+
+TEST(networking_Packet, printEmptyPacket)
+{
+    Packet packet = {};
+
+    std::stringstream stream;
+    stream << packet << std::flush;
+
+    EXPECT_EQ(stream.str(), "unknown packet (0B)");
+}

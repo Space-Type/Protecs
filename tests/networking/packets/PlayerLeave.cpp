@@ -47,3 +47,8 @@ TEST(networking_packets_PlayerLeave, serializeAndDeserialize)
     EXPECT_NO_THROW(initialData.serialize(buffer));
     EXPECT_NO_THROW(deserializedData = PlayerLeave::deserialize(buffer));
 }
+
+TEST(networking_packets_PlayerLeave, packetName)
+{
+    EXPECT_EQ(PlayerLeave::packetName(), "player-leave");
+}

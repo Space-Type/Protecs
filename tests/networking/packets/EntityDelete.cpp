@@ -70,3 +70,8 @@ TEST(networking_packets_EntityDelete, smallBufferDeserialize)
 
     EXPECT_THROW(EntityDelete::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_EntityDelete, packetName)
+{
+    EXPECT_EQ(EntityDelete::packetName(), "entity-delete");
+}

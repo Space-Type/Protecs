@@ -79,3 +79,8 @@ TEST(networking_packets_EntitySyncComponents, smallBufferDeserialize)
 
     EXPECT_THROW(EntitySyncComponents::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_EntitySyncComponents, packetName)
+{
+    EXPECT_EQ(EntitySyncComponents::packetName(), "entity-sync-components");
+}

@@ -92,3 +92,8 @@ TEST(networking_packets_EntityList, smallBufferDeserialize)
     EXPECT_THROW(EntityList::deserialize(buffer1), Protecs::SerializationError);
     EXPECT_THROW(EntityList::deserialize(buffer2), Protecs::SerializationError);
 }
+
+TEST(networking_packets_EntityList, packetName)
+{
+    EXPECT_EQ(EntityList::packetName(), "entity-list");
+}

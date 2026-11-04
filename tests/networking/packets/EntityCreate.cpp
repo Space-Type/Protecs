@@ -74,3 +74,8 @@ TEST(networking_packets_EntityCreate, smallBufferDeserialize)
 
     EXPECT_THROW(EntityCreate::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_EntityCreate, packetName)
+{
+    EXPECT_EQ(EntityCreate::packetName(), "entity-create");
+}

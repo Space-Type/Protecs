@@ -47,3 +47,8 @@ TEST(networking_packets_Ping, serializeAndDeserialize)
     EXPECT_NO_THROW(initialData.serialize(buffer));
     EXPECT_NO_THROW(deserializedData = Ping::deserialize(buffer));
 }
+
+TEST(networking_packets_Ping, packetName)
+{
+    EXPECT_EQ(Ping::packetName(), "ping");
+}

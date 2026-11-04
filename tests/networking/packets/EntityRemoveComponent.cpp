@@ -75,3 +75,8 @@ TEST(networking_packets_EntityRemoveComponent, smallBufferDeserialize)
 
     EXPECT_THROW(EntityRemoveComponent::deserialize(buffer), Protecs::SerializationError);
 }
+
+TEST(networking_packets_EntityRemoveComponent, packetName)
+{
+    EXPECT_EQ(EntityRemoveComponent::packetName(), "entity-remove-component");
+}

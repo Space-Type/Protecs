@@ -176,3 +176,8 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeVelocity)
     EXPECT_EQ(initialData.entity,            deserializedData.entity);
     EXPECT_EQ(initialData.component.index(), deserializedData.component.index());
 }
+
+TEST(networking_packets_EntityComponentData, packetName)
+{
+    EXPECT_EQ(EntityComponentData::packetName(), "entity-component-data");
+}
