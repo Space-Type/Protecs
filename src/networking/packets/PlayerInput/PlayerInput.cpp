@@ -18,9 +18,10 @@ void Protecs::Networking::Packets::PlayerInput::serialize(std::span<std::uint8_t
 
     auto* current = output.data();
 
+    Utils::copyFromValue(current, simulationTick);
+    Utils::copyFromValue(current, sequence);
     Utils::copyFromValue(current, input);
     Utils::copyFromValue(current, state);
-    Utils::copyFromValue(current, sequence);
 }
 
 auto Protecs::Networking::Packets::PlayerInput::deserialize(std::span<const std::uint8_t> input) -> PlayerInput
@@ -31,9 +32,10 @@ auto Protecs::Networking::Packets::PlayerInput::deserialize(std::span<const std:
     const auto* current = input.data();
     PlayerInput result;
 
+    Utils::copyToValue(result.simulationTick, current);
+    Utils::copyToValue(result.sequence, current);
     Utils::copyToValue(result.input, current);
     Utils::copyToValue(result.state, current);
-    Utils::copyToValue(result.sequence, current);
 
     return result;
 }

@@ -14,22 +14,24 @@ using Protecs::Networking::Packets::PlayerInput;
 
 
 static constexpr PlayerInput TEST_DATA = {
+    .simulationTick = 255,
+    .sequence = 10,
     .input = PlayerInput::LEFT,
     .state = PlayerInput::RELEASE,
-    .sequence = 10,
 };
 
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
-    0x02,  // input
-    0x01,  // state
-    0x0a,  // sequence
+    0xff, 0x00, 0x00, 0x00,  // simulationTick
+    0x0a,                    // sequence
+    0x02,                    // input
+    0x01,                    // state
 };
 
 
 TEST(networking_packets_PlayerInput, packedSize)
 {
     EXPECT_TRUE(TEST_DATA.packedSize() <= sizeof(TEST_DATA));
-    EXPECT_TRUE(TEST_DATA.packedSize() == sizeof(TEST_DATA.input) + sizeof(TEST_DATA.state) + sizeof(TEST_DATA.sequence));
+    EXPECT_TRUE(TEST_DATA.packedSize() == sizeof(TEST_DATA.simulationTick) + sizeof(TEST_DATA.input) + sizeof(TEST_DATA.state) + sizeof(TEST_DATA.sequence));
 }
 
 TEST(networking_packets_PlayerInput, serialization)
@@ -46,23 +48,25 @@ TEST(networking_packets_PlayerInput, deserialization)
 
     EXPECT_NO_THROW(data = PlayerInput::deserialize(SERIALIZED_TEST_DATA));
 
-    EXPECT_EQ(data.input,    TEST_DATA.input);
-    EXPECT_EQ(data.state,    TEST_DATA.state);
-    EXPECT_EQ(data.sequence, TEST_DATA.sequence);
+    EXPECT_EQ(data.simulationTick, TEST_DATA.simulationTick);
+    EXPECT_EQ(data.sequence,       TEST_DATA.sequence);
+    EXPECT_EQ(data.input,          TEST_DATA.input);
+    EXPECT_EQ(data.state,          TEST_DATA.state);
 }
 
 TEST(networking_packets_PlayerInput, serializeAndDeserialize)
 {
-    PlayerInput initialData = { .input = PlayerInput::TRIGGER, .state = PlayerInput::HOLD_DOWN, .sequence = 50 };
+    PlayerInput initialData = { .simulationTick = 78512, .sequence = 50, .input = PlayerInput::TRIGGER, .state = PlayerInput::HOLD_DOWN };
     PlayerInput deserializedData;
     std::uint8_t buffer[100];
 
     EXPECT_NO_THROW(initialData.serialize(buffer));
     EXPECT_NO_THROW(deserializedData = PlayerInput::deserialize(buffer));
 
-    EXPECT_EQ(initialData.input,    deserializedData.input);
-    EXPECT_EQ(initialData.state,    deserializedData.state);
-    EXPECT_EQ(initialData.sequence, deserializedData.sequence);
+    EXPECT_EQ(initialData.simulationTick, deserializedData.simulationTick);
+    EXPECT_EQ(initialData.sequence,       deserializedData.sequence);
+    EXPECT_EQ(initialData.input,          deserializedData.input);
+    EXPECT_EQ(initialData.state,          deserializedData.state);
 }
 
 TEST(networking_packets_PlayerInput, smallBufferSerialize)
