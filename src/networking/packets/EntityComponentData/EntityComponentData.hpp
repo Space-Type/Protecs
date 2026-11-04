@@ -16,6 +16,7 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityComponentData {
+        Tick simulationTick;
         NetworkEntity entity;
         Components::Variant component;
 
@@ -23,7 +24,7 @@ namespace Protecs::Networking::Packets {
         static EntityComponentData deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] std::size_t packedSize() const noexcept;
-        [[nodiscard]] static constexpr std::size_t partialPackedSize() noexcept { return sizeof(entity) + sizeof(ComponentType); }
+        [[nodiscard]] static constexpr std::size_t partialPackedSize() noexcept { return sizeof(simulationTick) + sizeof(entity) + sizeof(ComponentType); }
         [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-component-data"; }
     };
 }

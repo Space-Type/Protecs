@@ -14,11 +14,13 @@ using Protecs::Networking::Packets::EntityComponentData;
 
 
 static constexpr EntityComponentData TEST_DATA = {
+    .simulationTick = 5,
     .entity    = 751937,
     .component = Protecs::Components::Level{ 52, 3 },
 };
 
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
+    0x05, 0x00, 0x00, 0x00,                          // simulationTick
     0x41, 0x79, 0x0b, 0x00, 0x00, 0x00, 0x00, 0x00,  // entity
     0x00, 0x00,                                      // component type
     0x34, 0x00, 0x00, 0x00, 0x03,                    // component data
@@ -44,6 +46,7 @@ TEST(networking_packets_EntityComponentData, deserialization)
 
     EXPECT_NO_THROW(data = EntityComponentData::deserialize(SERIALIZED_TEST_DATA));
 
+    EXPECT_EQ(data.simulationTick, TEST_DATA.simulationTick);
     EXPECT_EQ(data.entity, TEST_DATA.entity);
     EXPECT_EQ(data.component.index(), TEST_DATA.component.index());
 }
@@ -64,7 +67,8 @@ TEST(networking_packets_EntityComponentData, smallBufferDeserialize)
 
 TEST(networking_packets_EntityComponentData, deserializeInvalidComponent)
 {
-    std::uint8_t buffer[10] = {
+    std::uint8_t buffer[14] = {
+        0x52, 0x00, 0x00, 0x00,
         0x52, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0xff, 0x53,
     };
@@ -76,13 +80,14 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeLevel)
 {
     using Protecs::Components::Transform;
 
-    EntityComponentData initialData = { .entity = 8734738157, .component = Transform{ { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData initialData = { .simulationTick = 52, .entity = 8734738157, .component = Transform{ { 1.2f, -5.3f }, 0.3f } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
     EXPECT_NO_THROW(initialData.serialize(buffer));
     EXPECT_NO_THROW(deserializedData = EntityComponentData::deserialize(buffer));
 
+    EXPECT_EQ(initialData.simulationTick,    deserializedData.simulationTick);
     EXPECT_EQ(initialData.entity,            deserializedData.entity);
     EXPECT_EQ(initialData.component.index(), deserializedData.component.index());
 }
@@ -91,7 +96,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeMovement)
 {
     using Protecs::Components::Movement;
 
-    EntityComponentData initialData = { .entity = 8734738157, .component = Movement{ { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData initialData = { .simulationTick = 81, .entity = 8734738157, .component = Movement{ { 1.2f, -5.3f }, 0.3f } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
@@ -106,7 +111,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializePathFinding)
 {
     using Protecs::Components::PathFinding;
 
-    EntityComponentData initialData = { .entity = 1234, .component = PathFinding{ PathFinding::STRAIGHT, { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData initialData = { .simulationTick = 62, .entity = 1234, .component = PathFinding{ PathFinding::STRAIGHT, { 1.2f, -5.3f }, 0.3f } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
@@ -121,7 +126,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializePlayerInput)
 {
     using Protecs::Components::PlayerInput;
 
-    EntityComponentData initialData = { .entity = 8734738157, .component = PlayerInput{ false, true, false, true, true } };
+    EntityComponentData initialData = { .simulationTick = 81, .entity = 8734738157, .component = PlayerInput{ false, true, false, true, true } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
@@ -136,7 +141,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializePlayerStats)
 {
     using Protecs::Components::PlayerStats;
 
-    EntityComponentData initialData = { .entity = 1234, .component = PlayerStats{ 2, 3, 5123 } };
+    EntityComponentData initialData = { .simulationTick = 62, .entity = 1234, .component = PlayerStats{ 2, 3, 5123 } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
@@ -151,7 +156,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeTransform)
 {
     using Protecs::Components::Transform;
 
-    EntityComponentData initialData = { .entity = 1234, .component = Transform{ { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData initialData = { .simulationTick = 62, .entity = 1234, .component = Transform{ { 1.2f, -5.3f }, 0.3f } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
@@ -166,7 +171,7 @@ TEST(networking_packets_EntityComponentData, serializeAndDeserializeVelocity)
 {
     using Protecs::Components::Velocity;
 
-    EntityComponentData initialData = { .entity = 1234, .component = Velocity{ { 1.2f, -5.3f }, 0.3f } };
+    EntityComponentData initialData = { .simulationTick = 62, .entity = 1234, .component = Velocity{ { 1.2f, -5.3f }, 0.3f } };
     EntityComponentData deserializedData;
     std::uint8_t buffer[100];
 
