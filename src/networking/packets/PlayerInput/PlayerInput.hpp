@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <string_view>
 #include <cstdint>
 #include <span>
 
@@ -22,5 +23,6 @@ namespace Protecs::Networking::Packets {
         static PlayerInput deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(input) + sizeof(state) + sizeof(sequence); }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "player-input"; }
     };
 }

@@ -39,5 +39,6 @@ namespace Protecs::Networking::Packets {
         static PlayerJoin deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] constexpr std::size_t packedSize() const noexcept { return sizeof(length) + length; }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "player-join"; }
     };
 }

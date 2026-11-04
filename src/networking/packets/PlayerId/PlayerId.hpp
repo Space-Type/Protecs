@@ -31,5 +31,6 @@ namespace Protecs::Networking::Packets {
         static PlayerId deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(id); }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "player-id"; }
     };
 }

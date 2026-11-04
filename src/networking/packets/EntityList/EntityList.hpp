@@ -22,5 +22,6 @@ namespace Protecs::Networking::Packets {
 
         [[nodiscard]] static constexpr std::size_t partialPackedSize() noexcept { return sizeof(std::uint32_t); }
         [[nodiscard]] std::size_t packedSize() const noexcept;
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-list"; }
     };
 }

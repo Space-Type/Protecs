@@ -39,5 +39,6 @@ namespace Protecs::Networking::Packets {
         static EntitySyncComponents deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(entity) + (Signature{}.size() + 7) / 8; }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-sync-components"; }
     };
 }

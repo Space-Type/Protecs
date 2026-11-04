@@ -22,5 +22,6 @@ namespace Protecs::Networking::Packets {
         static EntityRemoveComponent deserialize(std::span<const std::uint8_t> input);
 
         [[nodiscard]] static constexpr std::size_t packedSize() noexcept { return sizeof(entity) + sizeof(type); }
+        [[nodiscard]] static constexpr std::string_view packetName() noexcept { return "entity-remove-component"; }
     };
 }
