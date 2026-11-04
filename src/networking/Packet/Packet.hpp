@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../packets/PacketData.hpp"
+#include <ostream>
 #include <cstdint>
 #include <array>
 
@@ -22,3 +23,5 @@ namespace Protecs::Networking {
         Packets::PacketData deserialize() const;
     };
 }
+
+std::ostream& operator<<(std::ostream& stream, const Protecs::Networking::Packet& packet);
