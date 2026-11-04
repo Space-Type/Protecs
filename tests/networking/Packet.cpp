@@ -44,7 +44,7 @@ TEST(networking_Packet, invalidPacket)
     packet.raw[0] = 255;
     packet.filled = sizeof(std::uint8_t) + Packets::Ping::packedSize();
 
-    EXPECT_THROW(packet.deserialize(), Protecs::PacketError);
+    EXPECT_THROW(packet.deserialize(), Protecs::SerializationError);
 }
 
 TEST(networking_Packet, printPing)

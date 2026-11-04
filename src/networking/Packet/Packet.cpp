@@ -49,7 +49,7 @@ auto Protecs::Networking::Packet::deserialize() const -> Packets::PacketData
             result = PacketType::deserialize(std::span(dataStart, dataEnd));
         }, typeIndex);
     } catch (std::out_of_range) {
-        throw PacketError("unknown packet data type " + std::to_string(typeIndex));
+        throw SerializationError("unknown packet data type " + std::to_string(typeIndex));
     }
 
     return result;
