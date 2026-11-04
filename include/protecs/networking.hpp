@@ -11,5 +11,6 @@
 #include "../../src/networking/Address/Address.hpp"
 #include "../../src/networking/NetworkEntity/NetworkEntity.hpp"
 #include "../../src/networking/Packet/Packet.hpp"
+#include "../../src/networking/PacketQueue/PacketQueue.hpp"
 #include "../../src/networking/UDPSocket/UDPSocket.hpp"
 #include "networking/packets.hpp"
