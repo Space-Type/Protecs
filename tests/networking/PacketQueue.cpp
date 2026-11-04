@@ -138,3 +138,24 @@ TEST(networking_PacketQueue, invalidPacketOrdering)
 
     EXPECT_NO_THROW(EXPECT_EQ(queue.firstTick(), 0));
 }
+
+TEST(networking_PacketQueue, queueSwap)
+{
+    PacketQueue queue1;
+    PacketQueue queue2;
+
+    ASSERT_NO_THROW(queue1.push(SENDER_ADDR, Packets::EntityCreate{ 3 }));
+
+    ASSERT_EQ(queue1.firstTick(), 3);
+    ASSERT_EQ(queue2.firstTick(), 0);
+
+    EXPECT_NO_THROW(queue2 = std::move(queue1));
+
+    EXPECT_EQ(queue1.firstTick(), 0);
+    EXPECT_EQ(queue2.firstTick(), 3);
+
+    std::swap(queue1, queue2);
+
+    ASSERT_EQ(queue1.firstTick(), 3);
+    ASSERT_EQ(queue2.firstTick(), 0);
+}

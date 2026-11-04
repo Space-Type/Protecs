@@ -26,6 +26,13 @@ concept SequencePacket = SimulationTickPacket<T> && requires (const T& packet)
 };
 
 
+Protecs::Networking::PacketQueue::PacketQueue(PacketQueue&& other)
+    : PacketQueue()
+{
+    swap(other);
+}
+
+
 /**
  * Returns the first simulation
  * for which an event exists.
@@ -117,6 +124,20 @@ auto Protecs::Networking::PacketQueue::pop() -> std::optional<Element>
     m_Buffer.pop_back();
     return result;
 }
+
+/**
+ * Swaps the container's data with
+ * the data of the given queue.
+ *
+ * Note:
+ * This function sis thread-safe.
+ */
+void Protecs::Networking::PacketQueue::swap(PacketQueue& other)
+{
+    std::scoped_lock lock(m_BufferLock, other.m_BufferLock);
+    m_Buffer.swap(other.m_Buffer);
+}
+
 
 template <typename TA>
 struct PacketPriority {

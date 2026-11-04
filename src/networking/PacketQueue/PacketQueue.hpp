@@ -34,6 +34,7 @@ namespace Protecs::Networking {
         mutable std::mutex m_BufferLock;
 
         public:
+            PacketQueue(PacketQueue&& other);
             constexpr PacketQueue() noexcept
                 : m_Buffer()
                 , m_BufferLock()  // may or may not be constexpr
@@ -48,6 +49,9 @@ namespace Protecs::Networking {
             void push(const Address& addr, Packets::PacketData&& data);
             void push(const Address& addr, const Packet& packet);
             std::optional<Element> pop();
+
+            void swap(PacketQueue& other);
+            inline PacketQueue& operator=(PacketQueue&& other) { swap(other); return *this; }
 
         private:
             static bool hasHigherPriority(const Element& a, const Element& b) noexcept;
