@@ -42,11 +42,11 @@ auto Protecs::Networking::PacketQueue::firstTick() const -> Tick
     if (m_Buffer.empty())
         return 0;
 
-    const auto& packet = m_Buffer.back();
+    const auto& element = m_Buffer.back();
 
     Packets::PacketData packetData;
     try {
-        packetData = packet.deserialize();
+        packetData = element.second.deserialize();
     } catch (const SerializationError&) {
         return 0;
     }
@@ -68,9 +68,9 @@ auto Protecs::Networking::PacketQueue::firstTick() const -> Tick
  * information, please refer
  * on the main overload for push().
  */
-void Protecs::Networking::PacketQueue::push(Packets::PacketData&& data)
+void Protecs::Networking::PacketQueue::push(const Address& addr, Packets::PacketData&& data)
 {
-    push(Packet::serialize(std::move(data)));
+    push(addr, Packet::serialize(std::move(data)));
 }
 
 /**
@@ -83,17 +83,18 @@ void Protecs::Networking::PacketQueue::push(Packets::PacketData&& data)
  * The front of the vector is the
  * packet with the least priority.
  */
-void Protecs::Networking::PacketQueue::push(Packet&& packet)
+void Protecs::Networking::PacketQueue::push(const Address& addr, const Packet& packet)
 {
     std::scoped_lock lock(m_BufferLock);
 
     if (m_Buffer.empty()) {
-        m_Buffer.push_back(std::move(packet));
+        m_Buffer.emplace_back(addr, packet);
         return;
     }
 
-    auto loc = std::upper_bound(m_Buffer.cbegin(), m_Buffer.cend(), packet, hasHigherPriority);
-    m_Buffer.insert(loc, std::move(packet));
+    std::pair<Address, Packet> data = { addr, packet };
+    auto loc = std::upper_bound(m_Buffer.cbegin(), m_Buffer.cend(), data, hasHigherPriority);
+    m_Buffer.insert(loc, std::move(data));
 }
 
 /**
@@ -104,10 +105,10 @@ void Protecs::Networking::PacketQueue::push(Packet&& packet)
  * packet that's getting popped) is
  * the packet with the most priority.
  */
-auto Protecs::Networking::PacketQueue::pop() -> std::optional<Packet>
+auto Protecs::Networking::PacketQueue::pop() -> std::optional<Element>
 {
     std::scoped_lock lock(m_BufferLock);
-    std::optional<Packet> result;
+    std::optional<Element> result;
 
     if (m_Buffer.empty())
         return result;
@@ -211,7 +212,7 @@ struct PacketPriority {
  * such that the error can get handled
  * swiftly before moving on.
  */
-bool Protecs::Networking::PacketQueue::hasHigherPriority(const Packet& a, const Packet& b) noexcept
+bool Protecs::Networking::PacketQueue::hasHigherPriority(const Element& a, const Element& b) noexcept
 {
     Packets::PacketData dataA;
     Packets::PacketData dataB;
@@ -219,13 +220,13 @@ bool Protecs::Networking::PacketQueue::hasHigherPriority(const Packet& a, const 
     bool isValidB = true;
 
     try {
-        dataA = a.deserialize();
+        dataA = a.second.deserialize();
     } catch (const SerializationError&) {
         isValidA = false;
     }
 
     try {
-        dataB = b.deserialize();
+        dataB = b.second.deserialize();
     } catch (const SerializationError&) {
         isValidB = false;
     }
