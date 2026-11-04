@@ -18,6 +18,7 @@ void Protecs::Networking::Packets::EntitySyncComponents::serialize(std::span<std
 
     auto* current = output.data();
 
+    Utils::copyFromValue(current, simulationTick);
     Utils::copyFromValue(current, entity);
     Utils::copyFromValue(current, signature);
 }
@@ -30,6 +31,7 @@ auto Protecs::Networking::Packets::EntitySyncComponents::deserialize(std::span<c
     const auto* current = input.data();
     EntitySyncComponents result;
 
+    Utils::copyToValue(result.simulationTick, current);
     Utils::copyToValue(result.entity, current);
     Utils::copyToValue(result.signature, current);
 

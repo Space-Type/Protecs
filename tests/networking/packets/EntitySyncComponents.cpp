@@ -14,11 +14,13 @@ using Protecs::Networking::Packets::EntitySyncComponents;
 
 
 static constexpr EntitySyncComponents TEST_DATA = {
+    .simulationTick = 255,
     .entity = 751937,
     .signature = 12,
 };
 
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
+    0xff, 0x00, 0x00, 0x00,                          // simulationTick
     0x41, 0x79, 0x0b, 0x00, 0x00, 0x00, 0x00, 0x00,  // entity
     0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // signature
 };
@@ -32,7 +34,7 @@ TEST(networking_packets_EntitySyncComponents, packedSize)
     // The following test only holds true if
     // Wrecks::Signature is a multiple of 64
     // (implementation defined)
-    EXPECT_EQ(TEST_DATA.packedSize(), sizeof(TEST_DATA.entity) + sizeof(TEST_DATA.signature));
+    EXPECT_EQ(TEST_DATA.packedSize(), sizeof(TEST_DATA.simulationTick) + sizeof(TEST_DATA.entity) + sizeof(TEST_DATA.signature));
 }
 
 TEST(networking_packets_EntitySyncComponents, serialization)
@@ -49,21 +51,23 @@ TEST(networking_packets_EntitySyncComponents, deserialization)
 
     EXPECT_NO_THROW(data = EntitySyncComponents::deserialize(SERIALIZED_TEST_DATA));
 
-    EXPECT_EQ(data.entity,    TEST_DATA.entity);
-    EXPECT_EQ(data.signature, TEST_DATA.signature);
+    EXPECT_EQ(data.simulationTick, TEST_DATA.simulationTick);
+    EXPECT_EQ(data.entity,         TEST_DATA.entity);
+    EXPECT_EQ(data.signature,      TEST_DATA.signature);
 }
 
 TEST(networking_packets_EntitySyncComponents, serializeAndDeserialize)
 {
-    EntitySyncComponents initialData = { .entity = 8734738157, .signature = 0b0110001001100000111 };
+    EntitySyncComponents initialData = { .simulationTick = 86532, .entity = 8734738157, .signature = 0b0110001001100000111 };
     EntitySyncComponents deserializedData;
     std::uint8_t buffer[100];
 
     EXPECT_NO_THROW(initialData.serialize(buffer));
     EXPECT_NO_THROW(deserializedData = EntitySyncComponents::deserialize(buffer));
 
-    EXPECT_EQ(initialData.entity,    deserializedData.entity);
-    EXPECT_EQ(initialData.signature, deserializedData.signature);
+    EXPECT_EQ(initialData.simulationTick, deserializedData.simulationTick);
+    EXPECT_EQ(initialData.entity,         deserializedData.entity);
+    EXPECT_EQ(initialData.signature,      deserializedData.signature);
 }
 
 TEST(networking_packets_EntitySyncComponents, smallBufferSerialize)
