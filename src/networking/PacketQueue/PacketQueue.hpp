@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "../Address/Address.hpp"
 #include "../Packet/Packet.hpp"
 #include <optional>
 #include <vector>
@@ -27,7 +28,9 @@ namespace Protecs::Networking {
      * This container is thread-safe.
      */
     class PacketQueue {
-        std::vector<Packet> m_Buffer;
+        using Element = std::pair<Address, Packet>;
+
+        std::vector<Element> m_Buffer;
         mutable std::mutex m_BufferLock;
 
         public:
@@ -42,11 +45,11 @@ namespace Protecs::Networking {
              */
             Tick firstTick() const;
 
-            void push(Packets::PacketData&& data);
-            void push(Packet&& packet);
-            std::optional<Packet> pop();
+            void push(const Address& addr, Packets::PacketData&& data);
+            void push(const Address& addr, const Packet& packet);
+            std::optional<Element> pop();
 
         private:
-            static bool hasHigherPriority(const Packet& a, const Packet& b) noexcept;
+            static bool hasHigherPriority(const Element& a, const Element& b) noexcept;
     };
 }
