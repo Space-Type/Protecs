@@ -20,4 +20,6 @@ namespace Protecs {
 
     inline constexpr float POSITION_MAX_X = 800.f;
     inline constexpr float POSITION_MAX_Y = 450.f;
+
+    inline constexpr Wrecks::DeltaTime FIXED_UPDATE_RATE(2.0 / 120.0);
 }
