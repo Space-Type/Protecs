@@ -23,5 +23,6 @@ namespace Protecs::Networking::Packets {
                                     PlayerId,
                                     PlayerInput,
                                     PlayerJoin,
-                                    PlayerLeave>;
+                                    PlayerLeave,
+                                    TickSync>;
 }

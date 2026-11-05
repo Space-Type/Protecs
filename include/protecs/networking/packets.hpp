@@ -20,3 +20,4 @@
 #include "../../../src/networking/packets/PlayerInput/PlayerInput.hpp"
 #include "../../../src/networking/packets/PlayerJoin/PlayerJoin.hpp"
 #include "../../../src/networking/packets/PlayerLeave/PlayerLeave.hpp"
+#include "../../../src/networking/packets/TickSync/TickSync.hpp"
