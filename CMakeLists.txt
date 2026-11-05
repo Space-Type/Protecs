@@ -91,6 +91,8 @@ set(PROTECS_SOURCES
     src/networking/packets/PlayerJoin/PlayerJoin.hpp
     src/networking/packets/PlayerLeave/PlayerLeave.cpp
     src/networking/packets/PlayerLeave/PlayerLeave.hpp
+    src/networking/packets/TickSync/TickSync.cpp
+    src/networking/packets/TickSync/TickSync.hpp
     src/networking/packets/PacketData.hpp
     src/networking/UDPSocket/UDPSocket.hpp
     src/networking/UDPSocket/UDPSocket.unix.cpp
