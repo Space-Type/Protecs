@@ -22,6 +22,8 @@ namespace Protecs::Networking::Packets {
             ENEMY_SCANT,
         };
 
+        static constexpr std::uint8_t sequence = 0;
+
         Tick simulationTick;
         NetworkEntity id;
         EntityType type;

@@ -15,6 +15,8 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityList {
+        static constexpr std::uint8_t sequence = 20;
+
         Tick simulationTick;
         std::vector<std::pair<NetworkEntity, Signature>> entities;
 

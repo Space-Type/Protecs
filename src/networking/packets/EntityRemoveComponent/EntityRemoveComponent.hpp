@@ -15,6 +15,8 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityRemoveComponent {
+        static constexpr std::uint8_t sequence = 11;
+
         Tick simulationTick;
         NetworkEntity entity;
         ComponentType type;

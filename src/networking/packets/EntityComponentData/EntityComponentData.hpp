@@ -16,6 +16,8 @@
 
 namespace Protecs::Networking::Packets {
     struct EntityComponentData {
+        static constexpr std::uint8_t sequence = 10;
+
         Tick simulationTick;
         NetworkEntity entity;
         Components::Variant component;
