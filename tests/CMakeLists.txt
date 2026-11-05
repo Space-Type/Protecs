@@ -38,6 +38,7 @@ set(TEST_SOURCES
     networking/packets/PlayerInput.cpp
     networking/packets/PlayerJoin.cpp
     networking/packets/PlayerLeave.cpp
+    networking/packets/TickSync.cpp
     networking/Address.cpp
     networking/NetworkEntity.cpp
     networking/Packet.cpp
