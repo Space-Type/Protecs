@@ -28,28 +28,23 @@ TEST(networking_PacketQueue, emptyPop)
 {
     PacketQueue queue;
 
-    EXPECT_NO_THROW(
-        auto value = queue.pop();
-        EXPECT_FALSE(value.has_value());
-    );
+    EXPECT_NO_THROW(EXPECT_FALSE(queue.pop().has_value()));
 }
 
-TEST(networking_PacketQueue, emptyTick)
+TEST(networking_PacketQueue, emptyTickPop)
 {
     PacketQueue queue;
 
-    EXPECT_NO_THROW(
-        auto val = queue.firstTick();
-        EXPECT_EQ(val, 0);
-    );
+    EXPECT_NO_THROW(EXPECT_FALSE(queue.pop(10).has_value()));
 }
 
-TEST(networking_PacketQueue, validTick)
+TEST(networking_PacketQueue, isEmpty)
 {
     PacketQueue queue;
-    ASSERT_NO_THROW(queue.push(SENDER_ADDR, Packets::EntityCreate{ 5, 321 }));
 
-    EXPECT_EQ(queue.firstTick(), 5);
+    EXPECT_TRUE(queue.empty());
+    ASSERT_NO_THROW(queue.push(SENDER_ADDR, Packets::Ping{}));
+    EXPECT_FALSE(queue.empty());
 }
 
 TEST(networking_PacketQueue, sortedInsert)
@@ -81,46 +76,49 @@ TEST(networking_PacketQueue, sorting)
     ASSERT_NO_THROW(queue.push(SENDER_ADDR, Packets::EntityCreate{ 5, 321 }));
     ASSERT_NO_THROW(queue.push(SENDER_ADDR, Packets::PlayerInput{ 6, 1 }));
     ASSERT_NO_THROW(queue.push(SENDER_ADDR, Packets::Ping{}));
-
-    EXPECT_EQ(queue.firstTick(), 0);
+    ASSERT_FALSE(queue.empty());
 
     auto element = queue.pop();
-    EXPECT_TRUE(element.has_value());
+    ASSERT_TRUE(element.has_value());
     EXPECT_TRUE(std::holds_alternative<Packets::Ping>(element->second.deserialize()));
 
     element = queue.pop();
-    EXPECT_TRUE(element.has_value());
-    EXPECT_TRUE(std::holds_alternative<Packets::EntityCreate>(element->second.deserialize()));
+    ASSERT_TRUE(element.has_value());
+    ASSERT_TRUE(std::holds_alternative<Packets::EntityCreate>(element->second.deserialize()));
     EXPECT_EQ(std::get<Packets::EntityCreate>(element->second.deserialize()).id, 321);
 
-    element = queue.pop();
-    EXPECT_TRUE(element.has_value());
-    EXPECT_TRUE(std::holds_alternative<Packets::PlayerInput>(element->second.deserialize()));
+    element = queue.pop(5);
+    EXPECT_FALSE(element.has_value());
+
+    element = queue.pop(6);
+    ASSERT_TRUE(element.has_value());
+    ASSERT_TRUE(std::holds_alternative<Packets::PlayerInput>(element->second.deserialize()));
     EXPECT_EQ(std::get<Packets::PlayerInput>(element->second.deserialize()).sequence, 1);
 
-    element = queue.pop();
-    EXPECT_TRUE(element.has_value());
-    EXPECT_TRUE(std::holds_alternative<Packets::PlayerInput>(element->second.deserialize()));
+    element = queue.pop(6);
+    ASSERT_TRUE(element.has_value());
+    ASSERT_TRUE(std::holds_alternative<Packets::PlayerInput>(element->second.deserialize()));
     EXPECT_EQ(std::get<Packets::PlayerInput>(element->second.deserialize()).sequence, 2);
 
+    element = queue.pop(6);
+    EXPECT_FALSE(element.has_value());
+
     element = queue.pop();
-    EXPECT_TRUE(element.has_value());
-    EXPECT_TRUE(std::holds_alternative<Packets::EntityCreate>(element->second.deserialize()));
+    ASSERT_TRUE(element.has_value());
+    ASSERT_TRUE(std::holds_alternative<Packets::EntityCreate>(element->second.deserialize()));
     EXPECT_EQ(std::get<Packets::EntityCreate>(element->second.deserialize()).id, 123);
 }
 
-TEST(networking_PacketQueue, invalidPacketTick)
+TEST(networking_PacketQueue, invalidPacketTickPop)
 {
     PacketQueue queue;
+
     Protecs::Networking::Packet invalidPacket;
     invalidPacket.raw[0] = 255;
     invalidPacket.filled = 1;
 
     ASSERT_NO_THROW(queue.push(SENDER_ADDR, std::move(invalidPacket)));
-
-    EXPECT_NO_THROW(
-        EXPECT_EQ(queue.firstTick(), 0);
-    );
+    EXPECT_NO_THROW(EXPECT_TRUE(queue.pop(5).has_value()));
 }
 
 TEST(networking_PacketQueue, invalidPacketOrdering)
@@ -136,7 +134,8 @@ TEST(networking_PacketQueue, invalidPacketOrdering)
     EXPECT_NO_THROW(queue.push(SENDER_ADDR, Packets::Ping{}));
     EXPECT_NO_THROW(queue.push(SENDER_ADDR, std::move(invalidPacket)));
 
-    EXPECT_NO_THROW(EXPECT_EQ(queue.firstTick(), 0));
+    EXPECT_FALSE(queue.empty());
+    EXPECT_NO_THROW(EXPECT_TRUE(queue.pop(10).has_value()));
 }
 
 TEST(networking_PacketQueue, queueSwap)
@@ -146,16 +145,16 @@ TEST(networking_PacketQueue, queueSwap)
 
     ASSERT_NO_THROW(queue1.push(SENDER_ADDR, Packets::EntityCreate{ 3 }));
 
-    ASSERT_EQ(queue1.firstTick(), 3);
-    ASSERT_EQ(queue2.firstTick(), 0);
+    EXPECT_FALSE(queue1.empty());
+    EXPECT_TRUE(queue2.empty());
 
     EXPECT_NO_THROW(queue2 = std::move(queue1));
 
-    EXPECT_EQ(queue1.firstTick(), 0);
-    EXPECT_EQ(queue2.firstTick(), 3);
+    EXPECT_TRUE(queue1.empty());
+    EXPECT_FALSE(queue2.empty());
 
     std::swap(queue1, queue2);
 
-    ASSERT_EQ(queue1.firstTick(), 3);
-    ASSERT_EQ(queue2.firstTick(), 0);
+    EXPECT_FALSE(queue1.empty());
+    EXPECT_TRUE(queue2.empty());
 }
