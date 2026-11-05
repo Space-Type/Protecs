@@ -32,40 +32,14 @@ Protecs::Networking::PacketQueue::PacketQueue(PacketQueue&& other)
     swap(other);
 }
 
-
 /**
- * Returns the first simulation
- * for which an event exists.
- *
- * Note:
- * If no packets exist, or if a
- * packet with no specified tick
- * exists, 0 is returned.
+ * Determines if the packet
+ * is empty or not.
  */
-auto Protecs::Networking::PacketQueue::firstTick() const -> Tick
+auto Protecs::Networking::PacketQueue::empty() const -> bool
 {
     std::scoped_lock lock(m_BufferLock);
-
-    if (m_Buffer.empty())
-        return 0;
-
-    const auto& element = m_Buffer.back();
-
-    Packets::PacketData packetData;
-    try {
-        packetData = element.second.deserialize();
-    } catch (const SerializationError&) {
-        return 0;
-    }
-
-    return std::visit([&](const auto& data) -> Tick {
-        using PacketType = std::decay_t<decltype(data)>;
-        if constexpr (SimulationTickPacket<PacketType>) {
-            return data.simulationTick;
-        } else {
-            return 0;
-        }
-    }, packetData);
+    return m_Buffer.empty();
 }
 
 /**
@@ -105,6 +79,30 @@ void Protecs::Networking::PacketQueue::push(const Address& addr, const Packet& p
 }
 
 /**
+ * Pops the first available packet,
+ * but only if its simulation tick
+ * is equal to or under the specified
+ * tick.
+ */
+auto Protecs::Networking::PacketQueue::pop(Protecs::Tick tick) -> std::optional<Element>
+{
+    std::scoped_lock lock(m_BufferLock);
+    std::optional<Element> result;
+
+    if (m_Buffer.empty())
+        return result;
+
+    auto& element = m_Buffer.back();
+
+    if (packetTick(element.second) > tick)
+        return result;
+
+    result = std::move(element);
+    m_Buffer.pop_back();
+    return result;
+}
+
+/**
  * Pops the first available packet (if any).
  *
  * Note:
@@ -136,6 +134,32 @@ void Protecs::Networking::PacketQueue::swap(PacketQueue& other)
 {
     std::scoped_lock lock(m_BufferLock, other.m_BufferLock);
     m_Buffer.swap(other.m_Buffer);
+}
+
+/**
+ * Retrieves the simulation tick
+ * of the given packet.
+ * If the packet doesn't have a
+ * simulation tick, 0 is returned
+ * instead.
+ */
+auto Protecs::Networking::PacketQueue::packetTick(const Packet& packet) noexcept -> Protecs::Tick
+{
+    Packets::PacketData packetData;
+    try {
+        packetData = packet.deserialize();
+    } catch (const SerializationError&) {
+        return 0;
+    }
+
+    return std::visit([&](const auto& data) -> Tick {
+        using PacketType = std::decay_t<decltype(data)>;
+        if constexpr (SimulationTickPacket<PacketType>) {
+            return data.simulationTick;
+        } else {
+            return 0;
+        }
+    }, packetData);
 }
 
 
