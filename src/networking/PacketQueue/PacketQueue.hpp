@@ -40,20 +40,30 @@ namespace Protecs::Networking {
                 , m_BufferLock()  // may or may not be constexpr
             {}
 
-            /**
-             * Returns the first simulation
-             * for which a packet has been received.
-             */
-            Tick firstTick() const;
+            [[nodiscard]] bool empty() const;
 
             void push(const Address& addr, Packets::PacketData&& data);
             void push(const Address& addr, const Packet& packet);
+
+            /**
+             * Pops first available the element with
+             * the highest priority from the queue,
+             * up to the specified simulation tick
+             * (inclusive).
+             */
+            std::optional<Element> pop(Protecs::Tick tick);
+
+            /**
+             * Pops first available the element with
+             * the highest priority from the queue.
+             */
             std::optional<Element> pop();
 
             void swap(PacketQueue& other);
             inline PacketQueue& operator=(PacketQueue&& other) { swap(other); return *this; }
 
         private:
+            static Protecs::Tick packetTick(const Packet& packet) noexcept;
             static bool hasHigherPriority(const Element& a, const Element& b) noexcept;
     };
 }
