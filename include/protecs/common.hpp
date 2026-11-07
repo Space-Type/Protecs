@@ -18,8 +18,11 @@ namespace Protecs {
     using Signature = Wrecks::Signature;
     using Tick = std::uint32_t;
 
-    inline constexpr float POSITION_MAX_X = 800.f;
-    inline constexpr float POSITION_MAX_Y = 450.f;
+    inline constexpr float MAP_MAX_X = 800.f;
+    inline constexpr float MAP_MAX_Y = 450.f;
+
+    inline constexpr float PLAYER_WIDTH = 34.f;
+    inline constexpr float PLAYER_HEIGHT = 17.f;
 
     inline constexpr Wrecks::DeltaTime FIXED_UPDATE_RATE(2.0 / 120.0);
 }
