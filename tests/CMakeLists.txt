@@ -49,6 +49,7 @@ set(TEST_SOURCES
     systems/Motion.cpp
     systems/Movement.cpp
     systems/PathFinding.cpp
+    systems/PlayerBounds.cpp
     systems/PlayerMovement.cpp
     utils/Memory.cpp)
 

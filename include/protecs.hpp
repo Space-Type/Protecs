@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "protecs/common.hpp"
 #include "protecs/components.hpp"
 #include "protecs/errors.hpp"
 #include "protecs/networking.hpp"
