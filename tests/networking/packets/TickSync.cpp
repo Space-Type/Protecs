@@ -16,12 +16,14 @@ using Protecs::Networking::Packets::TickSync;
 static constexpr TickSync TEST_DATA = {
     .clientTick = 5,
     .serverTick = 10,
+    .clientTime = std::chrono::steady_clock::time_point(std::chrono::nanoseconds(65535)),
     .serverTime = std::chrono::steady_clock::time_point(std::chrono::nanoseconds(255)),
 };
 
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
     0x05, 0x00, 0x00, 0x00,                          // clientTick
     0x0a, 0x00, 0x00, 0x00,                          // serverTick
+    0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // clientTime
     0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // serverTime
 };
 
@@ -47,12 +49,13 @@ TEST(networking_packets_TickSync, deserialization)
 
     EXPECT_EQ(data.clientTick, TEST_DATA.clientTick);
     EXPECT_EQ(data.serverTick, TEST_DATA.serverTick);
+    EXPECT_EQ(data.clientTime, TEST_DATA.clientTime);
     EXPECT_EQ(data.serverTime, TEST_DATA.serverTime);
 }
 
 TEST(networking_packets_TickSync, serializeAndDeserialize)
 {
-    TickSync initialData = { 652, 89352, std::chrono::steady_clock::now() };
+    TickSync initialData = { 652, 89352, std::chrono::steady_clock::now(), std::chrono::steady_clock::now() };
     TickSync deserializedData;
     std::uint8_t buffer[100];
 
@@ -61,6 +64,7 @@ TEST(networking_packets_TickSync, serializeAndDeserialize)
 
     EXPECT_EQ(initialData.clientTick, deserializedData.clientTick);
     EXPECT_EQ(initialData.serverTick, deserializedData.serverTick);
+    EXPECT_EQ(initialData.clientTime, deserializedData.clientTime);
     EXPECT_EQ(initialData.serverTime, deserializedData.serverTime);
 }
 
