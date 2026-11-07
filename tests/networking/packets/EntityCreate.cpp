@@ -81,3 +81,10 @@ TEST(networking_packets_EntityCreate, packetName)
 {
     EXPECT_EQ(EntityCreate::packetName(), "entity-create");
 }
+
+TEST(networking_packets_EntityCreate, missileTypesKeepTheExistingValues)
+{
+    EXPECT_EQ(EntityCreate::ENEMY_SCANT, 3);
+    EXPECT_EQ(EntityCreate::PLAYER_MISSILE, 4);
+    EXPECT_EQ(EntityCreate::ENEMY_MISSILE, 5);
+}
