@@ -87,6 +87,14 @@ TEST(networking_packets_PlayerJoin, tooLongNameDeserialize)
     EXPECT_THROW(PlayerJoin::deserialize(buffer), Protecs::SerializationError);
 }
 
+TEST(networking_packets_PlayerJoin, truncatedNameDeserialize)
+{
+    // A valid length, but fewer name bytes than announced
+    std::uint8_t buffer[6] = { 10, 'J', 'o', 'h', 'n', '!' };
+
+    EXPECT_THROW(PlayerJoin::deserialize(buffer), Protecs::SerializationError);
+}
+
 TEST(networking_packets_PlayerJoin, longestNameDeserialize)
 {
     std::uint8_t buffer[33] = {};
