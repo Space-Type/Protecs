@@ -20,5 +20,8 @@ void Protecs::Systems::PlayerBounds::operator()(Wrecks::ECS::Entity entity, Wrec
 {
     auto& transform = m_GetTransform(entity);
 
-    transform.position.clamp(Utils::Vec2D{ 0.f, 0.f }, Utils::Vec2D{ MAP_MAX_X, MAP_MAX_Y });
+    transform.position.clamp(
+        Utils::Vec2D{ 0.f, 0.f },
+        Utils::Vec2D{ MAP_MAX_X - PLAYER_WIDTH, MAP_MAX_Y - PLAYER_HEIGHT }
+    );
 }
