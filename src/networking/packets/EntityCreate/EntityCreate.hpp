@@ -20,6 +20,8 @@ namespace Protecs::Networking::Packets {
             PLAYER,
             ENEMY_PATA_PATA,
             ENEMY_SCANT,
+            PLAYER_MISSILE,  // shot by a player
+            ENEMY_MISSILE,   // shot by an enemy
         };
 
         static constexpr std::uint8_t sequence = 0;
