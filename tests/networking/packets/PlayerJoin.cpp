@@ -77,6 +77,33 @@ TEST(networking_packets_PlayerJoin, smallBufferDeserialize)
     EXPECT_THROW(PlayerJoin::deserialize(buffer2), Protecs::SerializationError);
 }
 
+TEST(networking_packets_PlayerJoin, tooLongNameDeserialize)
+{
+    std::uint8_t buffer[300] = {};
+
+    buffer[0] = 33;
+    EXPECT_THROW(PlayerJoin::deserialize(buffer), Protecs::SerializationError);
+    buffer[0] = 255;
+    EXPECT_THROW(PlayerJoin::deserialize(buffer), Protecs::SerializationError);
+}
+
+TEST(networking_packets_PlayerJoin, longestNameDeserialize)
+{
+    std::uint8_t buffer[33] = {};
+
+    buffer[0] = 32;
+    EXPECT_NO_THROW(PlayerJoin::deserialize(buffer));
+}
+
+TEST(networking_packets_PlayerJoin, tooLongNameSerialize)
+{
+    PlayerJoin data = PlayerJoin::fromStr("John");
+    std::uint8_t buffer[300];
+
+    data.length = 33;
+    EXPECT_THROW(data.serialize(buffer), Protecs::SerializationError);
+}
+
 TEST(networking_packets_PlayerJoin, packetName)
 {
     EXPECT_EQ(PlayerJoin::packetName(), "player-join");
