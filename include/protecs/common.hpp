@@ -24,5 +24,5 @@ namespace Protecs {
     inline constexpr float PLAYER_WIDTH = 34.f;
     inline constexpr float PLAYER_HEIGHT = 17.f;
 
-    inline constexpr Wrecks::DeltaTime FIXED_UPDATE_RATE = std::chrono::duration<double>(2.0 / 120.0);
+    inline constexpr Wrecks::DeltaTime FIXED_UPDATE_RATE = std::chrono::duration<double>(1.0 / 120.0);
 }
