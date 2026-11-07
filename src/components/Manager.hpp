@@ -21,7 +21,8 @@ namespace Protecs::Components {
                                                   PlayerInput,
                                                   PlayerStats,
                                                   Transform,
-                                                  Velocity>;
+                                                  Velocity,
+                                                  PlayerName>;  // last: the other indices must not change
 
     using Variant = Wrecks::Utils::replace_container_type_t<std::variant<>, Manager>;
 }
