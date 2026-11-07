@@ -25,6 +25,7 @@ namespace Protecs::Components {
         std::uint8_t slot;    // 0-3, fixed while the player is connected
         std::uint8_t lives;   // 0 means the player is out of the game
         std::uint32_t score;
+        std::uint8_t charge = 0;  // charged shot level while the trigger is held (0: not charging)
 
         void serialize(std::uint8_t*& output, std::size_t size) const;
         static PlayerStats deserialize(const std::uint8_t*& data, std::size_t size);
@@ -40,7 +41,8 @@ namespace Protecs::Components {
             return
                 sizeof(slot) +
                 sizeof(lives) +
-                sizeof(score);
+                sizeof(score) +
+                sizeof(charge);
         }
     };
 }
