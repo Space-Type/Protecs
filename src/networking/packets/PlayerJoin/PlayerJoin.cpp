@@ -30,6 +30,8 @@ auto Protecs::Networking::Packets::PlayerJoin::str() const -> std::string_view
 
 void Protecs::Networking::Packets::PlayerJoin::serialize(std::span<std::uint8_t> output) const
 {
+    if (length > name.size())
+        throw SerializationError("unable to serialize PlayerJoin packet as its name is too long");
     if (output.size() < packedSize())
         throw SerializationError("unable to serialize PlayerJoin packet as the output buffer is too small");
 
@@ -48,6 +50,8 @@ auto Protecs::Networking::Packets::PlayerJoin::deserialize(std::span<const std::
     PlayerJoin result;
 
     Utils::copyToValue(result.length, current);
+    if (result.length > result.name.size())
+        throw SerializationError("unable to deserialize PlayerJoin packet as its name is too long");
     if (input.size() - sizeof(std::uint8_t) < result.length)
         throw SerializationError("unable to deserialize PlayerJoin packet as the input buffer is too small");
 
