@@ -45,6 +45,8 @@ set(PROTECS_SOURCES
     src/components/PathFinding/PathFinding.hpp
     src/components/PlayerInput/PlayerInput.cpp
     src/components/PlayerInput/PlayerInput.hpp
+    src/components/PlayerName/PlayerName.cpp
+    src/components/PlayerName/PlayerName.hpp
     src/components/PlayerStats/PlayerStats.cpp
     src/components/PlayerStats/PlayerStats.hpp
     src/components/Transform/Transform.cpp
