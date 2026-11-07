@@ -86,6 +86,16 @@ TEST(components_PlayerName, smallBufferDeserialize)
     EXPECT_THROW(PlayerName::deserialize(buffer, 0), Protecs::SerializationError);
 }
 
+TEST(components_PlayerName, tooLongLengthSerialize)
+{
+    PlayerName data = PlayerName::fromStr("Bard");
+    std::uint8_t store[100];
+    std::uint8_t* buffer = store;
+
+    data.length = PlayerName::MAX_LENGTH + 1;
+    EXPECT_THROW(data.serialize(buffer, sizeof(store)), Protecs::SerializationError);
+}
+
 TEST(components_PlayerName, tooLongLengthIsRejected)
 {
     std::uint8_t store[300] = { 0xff };  // length 255, enough bytes behind it
