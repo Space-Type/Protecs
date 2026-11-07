@@ -21,6 +21,7 @@ set(TEST_SOURCES
     components/Movement.cpp
     components/PathFinding.cpp
     components/PlayerInput.cpp
+    components/Health.cpp
     components/PlayerName.cpp
     components/PlayerStats.cpp
     components/Transform.cpp

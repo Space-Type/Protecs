@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "../../../src/components/Health/Health.hpp"
 #include "../../../src/components/Level/Level.hpp"
 #include "../../../src/components/Movement/Movement.hpp"
 #include "../../../src/components/PathFinding/PathFinding.hpp"
