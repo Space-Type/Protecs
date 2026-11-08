@@ -15,10 +15,11 @@
 using Protecs::Components::Level;
 
 
-static constexpr Level TEST_DATA = { 52, 8 };
+static constexpr Level TEST_DATA = { 52, 8, true };
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
     0x34, 0x00, 0x00, 0x00,  // progression
     0x08,                    // stage
+    0x01,                    // won
 };
 
 
@@ -43,11 +44,12 @@ TEST(components_Level, deserialization)
 
     EXPECT_EQ(data.progression, TEST_DATA.progression);
     EXPECT_EQ(data.stage, TEST_DATA.stage);
+    EXPECT_EQ(data.won, TEST_DATA.won);
 }
 
 TEST(components_Level, serializeAndDeserialize)
 {
-    Level initialData = { 127318314, 1 };
+    Level initialData = { 127318314, 1, false };
     Level deserializedData;
     std::uint8_t store[100];
 
@@ -59,6 +61,17 @@ TEST(components_Level, serializeAndDeserialize)
 
     EXPECT_EQ(initialData.progression, deserializedData.progression);
     EXPECT_EQ(initialData.stage, deserializedData.stage);
+    EXPECT_EQ(initialData.won, deserializedData.won);
+}
+
+TEST(components_Level, anyNonZeroByteIsWon)
+{
+    static constexpr std::uint8_t DATA[] = { 0x01, 0x00, 0x00, 0x00, 0x02, 0xFF };
+    const std::uint8_t *buffer = DATA;
+
+    Level data = Level::deserialize(buffer, sizeof(DATA));
+
+    EXPECT_TRUE(data.won);
 }
 
 TEST(components_Level, smallBufferSerialize)

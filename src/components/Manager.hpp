@@ -22,7 +22,9 @@ namespace Protecs::Components {
                                                   PlayerStats,
                                                   Transform,
                                                   Velocity,
-                                                  PlayerName>;  // last: the other indices must not change
+                                                  PlayerName,
+                                                  Health,
+                                                  BossPhase>;  // new components last: the other indices must not change
 
     using Variant = Wrecks::Utils::replace_container_type_t<std::variant<>, Manager>;
 }

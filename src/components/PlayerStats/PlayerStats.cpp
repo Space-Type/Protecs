@@ -23,6 +23,7 @@ void Protecs::Components::PlayerStats::serialize(std::uint8_t*& output, std::siz
     Utils::copyFromValue(output, slot);
     Utils::copyFromValue(output, lives);
     Utils::copyFromValue(output, score);
+    Utils::copyFromValue(output, charge);
 }
 
 /**
@@ -39,5 +40,6 @@ auto Protecs::Components::PlayerStats::deserialize(const std::uint8_t*& data, st
     Utils::copyToValue(result.slot, data);
     Utils::copyToValue(result.lives, data);
     Utils::copyToValue(result.score, data);
+    Utils::copyToValue(result.charge, data);
     return result;
 }

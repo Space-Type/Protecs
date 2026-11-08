@@ -45,6 +45,10 @@ set(PROTECS_SOURCES
     src/components/PathFinding/PathFinding.hpp
     src/components/PlayerInput/PlayerInput.cpp
     src/components/PlayerInput/PlayerInput.hpp
+    src/components/Health/Health.cpp
+    src/components/Health/Health.hpp
+    src/components/BossPhase/BossPhase.cpp
+    src/components/BossPhase/BossPhase.hpp
     src/components/PlayerName/PlayerName.cpp
     src/components/PlayerName/PlayerName.hpp
     src/components/PlayerStats/PlayerStats.cpp
