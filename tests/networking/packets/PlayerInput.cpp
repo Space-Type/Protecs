@@ -87,3 +87,8 @@ TEST(networking_packets_PlayerInput, packetName)
 {
     EXPECT_EQ(PlayerInput::packetName(), "player-input");
 }
+
+TEST(networking_packets_PlayerInput, forceComesAfterTrigger)
+{
+    EXPECT_EQ(PlayerInput::FORCE, PlayerInput::TRIGGER + 1);
+}

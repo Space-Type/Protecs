@@ -18,10 +18,12 @@ namespace Protecs::Components {
         bool left;
         bool right;
         bool trigger;
+        bool force = false;  // launches or recalls the Force
 
         constexpr std::uint8_t packed() const noexcept
         {
             return
+                (force   << 5) |
                 (up      << 4) |
                 (down    << 3) |
                 (left    << 2) |

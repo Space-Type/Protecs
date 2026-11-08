@@ -81,3 +81,17 @@ TEST(components_Input, smallBufferDeserialize)
 
     EXPECT_THROW(PlayerInput::deserialize(buffer, 0), Protecs::SerializationError);
 }
+
+TEST(components_Input, forceIsBitFive)
+{
+    PlayerInput input = { false, false, false, false, false };
+    std::uint8_t store[1];
+    std::uint8_t* out = store;
+    const std::uint8_t* in = store;
+
+    input.force = true;
+    EXPECT_EQ(input.packed(), 0b100000);
+    input.serialize(out, sizeof(store));
+    EXPECT_TRUE(PlayerInput::deserialize(in, sizeof(store)).force);
+    EXPECT_FALSE(PlayerInput::deserialize(in = store, sizeof(store)).up);
+}
