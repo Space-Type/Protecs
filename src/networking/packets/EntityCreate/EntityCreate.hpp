@@ -31,6 +31,11 @@ namespace Protecs::Networking::Packets {
             ENEMY_DOBKERATOPS_CORE,  // its weak point, the only part that takes damage
             ENEMY_DOBKERATOPS_TAIL,  // a segment of its tail: armored, hurts on contact
             PICKUP_LIFE,             // dropped by an enemy: one more life for the player who takes it
+            ENEMY_POW_ARMOR,         // carries a Force item, dropped when it dies
+            PICKUP_FORCE,            // the Force item: a Force, or a higher level for the one the player has
+            FORCE_1,                 // the Force (an attachable pod) of a player, by level
+            FORCE_2,
+            FORCE_3,
         };
 
         static constexpr std::uint8_t sequence = 0;

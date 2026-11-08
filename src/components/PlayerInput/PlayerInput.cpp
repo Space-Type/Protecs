@@ -37,7 +37,8 @@ auto Protecs::Components::PlayerInput::deserialize(const std::uint8_t*& data, st
 
     PlayerInput result;
 
-    result.up      = packed & 0b10000;
+    result.force   = packed & 0b100000;
+    result.up      = packed & 0b010000;
     result.down    = packed & 0b01000;
     result.left    = packed & 0b00100;
     result.right   = packed & 0b00010;

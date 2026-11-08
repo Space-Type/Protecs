@@ -18,7 +18,7 @@ namespace Protecs::Networking::Packets {
     struct PlayerInput {
         Tick simulationTick;
         std::uint8_t sequence;  // relative to specified simulation tick
-        enum : std::uint8_t { UP, DOWN, LEFT, RIGHT, TRIGGER } input;
+        enum : std::uint8_t { UP, DOWN, LEFT, RIGHT, TRIGGER, FORCE } input;  // a receiver ignores a value it does not know
         enum : std::uint8_t { HOLD_DOWN, RELEASE } state;
 
         void serialize(std::span<std::uint8_t> output) const;
