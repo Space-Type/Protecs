@@ -114,3 +114,9 @@ TEST(networking_packets_EntityCreate, forceTypesComeAfterTheLifePickup)
     EXPECT_EQ(EntityCreate::FORCE_1, EntityCreate::PICKUP_FORCE + 1);
     EXPECT_EQ(EntityCreate::FORCE_3, EntityCreate::FORCE_1 + 2);
 }
+
+TEST(networking_packets_EntityCreate, gomanderTypesComeAfterTheForce)
+{
+    EXPECT_EQ(EntityCreate::ENEMY_GOMANDER, EntityCreate::FORCE_3 + 1);
+    EXPECT_EQ(EntityCreate::ENEMY_GOMANDER_CORE, EntityCreate::ENEMY_GOMANDER + 1);
+}
