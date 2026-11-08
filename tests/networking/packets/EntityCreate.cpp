@@ -106,3 +106,11 @@ TEST(networking_packets_EntityCreate, pickupTypesComeAfterTheBoss)
 {
     EXPECT_EQ(EntityCreate::PICKUP_LIFE, EntityCreate::ENEMY_DOBKERATOPS_TAIL + 1);
 }
+
+TEST(networking_packets_EntityCreate, forceTypesComeAfterTheLifePickup)
+{
+    EXPECT_EQ(EntityCreate::ENEMY_POW_ARMOR, EntityCreate::PICKUP_LIFE + 1);
+    EXPECT_EQ(EntityCreate::PICKUP_FORCE, EntityCreate::ENEMY_POW_ARMOR + 1);
+    EXPECT_EQ(EntityCreate::FORCE_1, EntityCreate::PICKUP_FORCE + 1);
+    EXPECT_EQ(EntityCreate::FORCE_3, EntityCreate::FORCE_1 + 2);
+}
