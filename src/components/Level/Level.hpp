@@ -16,6 +16,7 @@ namespace Protecs::Components {
     struct Level {
         std::uint32_t progression;  // progresses linearly as the level advances
         std::uint8_t stage;
+        bool won = false;           // the last stage is cleared: the game is over, as a victory
 
         void serialize(std::uint8_t*& output, std::size_t size) const;
         static Level deserialize(const std::uint8_t*& data, std::size_t size);
@@ -30,7 +31,8 @@ namespace Protecs::Components {
         {
             return
                 sizeof(progression) +
-                sizeof(stage);
+                sizeof(stage) +
+                sizeof(std::uint8_t);  // won
         }
     };
 }
