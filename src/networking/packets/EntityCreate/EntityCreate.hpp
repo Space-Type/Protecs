@@ -30,6 +30,7 @@ namespace Protecs::Networking::Packets {
             ENEMY_DOBKERATOPS,       // stage 1 boss: its body, which only absorbs shots
             ENEMY_DOBKERATOPS_CORE,  // its weak point, the only part that takes damage
             ENEMY_DOBKERATOPS_TAIL,  // a segment of its tail: armored, hurts on contact
+            PICKUP_LIFE,             // dropped by an enemy: one more life for the player who takes it
         };
 
         static constexpr std::uint8_t sequence = 0;
