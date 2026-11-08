@@ -101,3 +101,8 @@ TEST(networking_packets_EntityCreate, bossTypesComeAfterTheBeams)
     EXPECT_EQ(EntityCreate::ENEMY_DOBKERATOPS_CORE, EntityCreate::ENEMY_DOBKERATOPS + 1);
     EXPECT_EQ(EntityCreate::ENEMY_DOBKERATOPS_TAIL, EntityCreate::ENEMY_DOBKERATOPS_CORE + 1);
 }
+
+TEST(networking_packets_EntityCreate, pickupTypesComeAfterTheBoss)
+{
+    EXPECT_EQ(EntityCreate::PICKUP_LIFE, EntityCreate::ENEMY_DOBKERATOPS_TAIL + 1);
+}
