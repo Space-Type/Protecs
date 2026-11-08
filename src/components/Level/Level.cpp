@@ -22,6 +22,7 @@ void Protecs::Components::Level::serialize(std::uint8_t*& output, std::size_t si
 
     Utils::copyFromValue(output, progression);
     Utils::copyFromValue(output, stage);
+    Utils::copyFromValue(output, static_cast<std::uint8_t>(won ? 1 : 0));
 }
 
 /**
@@ -34,9 +35,12 @@ auto Protecs::Components::Level::deserialize(const std::uint8_t*& data, std::siz
         throw Protecs::SerializationError("not enough bytes in input to deserialize data into Level");
 
     Level result;
+    std::uint8_t won = 0;
 
     Utils::copyToValue(result.progression, data);
     Utils::copyToValue(result.stage, data);
+    Utils::copyToValue(won, data);
+    result.won = won != 0;  // any other byte than 0 or 1 is not a bool
 
     return result;
 }
