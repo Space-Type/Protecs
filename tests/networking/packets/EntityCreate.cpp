@@ -99,4 +99,5 @@ TEST(networking_packets_EntityCreate, bossTypesComeAfterTheBeams)
 {
     EXPECT_EQ(EntityCreate::ENEMY_DOBKERATOPS, EntityCreate::PLAYER_BEAM_5 + 1);
     EXPECT_EQ(EntityCreate::ENEMY_DOBKERATOPS_CORE, EntityCreate::ENEMY_DOBKERATOPS + 1);
+    EXPECT_EQ(EntityCreate::ENEMY_DOBKERATOPS_TAIL, EntityCreate::ENEMY_DOBKERATOPS_CORE + 1);
 }
