@@ -36,6 +36,8 @@ namespace Protecs::Networking::Packets {
             FORCE_1,                 // the Force (an attachable pod) of a player, by level
             FORCE_2,
             FORCE_3,
+            ENEMY_GOMANDER,          // stage 2 boss: its body, which only absorbs shots
+            ENEMY_GOMANDER_CORE,     // its eye, the weak point: the only part that takes damage
         };
 
         static constexpr std::uint8_t sequence = 0;
