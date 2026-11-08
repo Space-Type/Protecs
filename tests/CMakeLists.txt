@@ -22,6 +22,7 @@ set(TEST_SOURCES
     components/PathFinding.cpp
     components/PlayerInput.cpp
     components/Health.cpp
+    components/BossPhase.cpp
     components/PlayerName.cpp
     components/PlayerStats.cpp
     components/Transform.cpp
