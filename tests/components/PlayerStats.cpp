@@ -15,11 +15,12 @@
 using Protecs::Components::PlayerStats;
 
 
-static constexpr PlayerStats TEST_DATA = { 2, 3, 1500 };
+static constexpr PlayerStats TEST_DATA = { 2, 3, 1500, 4 };
 static constexpr std::uint8_t SERIALIZED_TEST_DATA[] = {
     0x02,                    // slot
     0x03,                    // lives
     0xdc, 0x05, 0x00, 0x00,  // score
+    0x04,                    // charge
 };
 
 TEST(components_PlayerStats, serialization)
@@ -42,11 +43,12 @@ TEST(components_PlayerStats, deserialization)
     EXPECT_EQ(data.slot, TEST_DATA.slot);
     EXPECT_EQ(data.lives, TEST_DATA.lives);
     EXPECT_EQ(data.score, TEST_DATA.score);
+    EXPECT_EQ(data.charge, TEST_DATA.charge);
 }
 
 TEST(components_PlayerStats, serializeAndDeserialize)
 {
-    PlayerStats initialData = { 3, 0, 4000000000 };
+    PlayerStats initialData = { 3, 0, 4000000000, 5 };
     PlayerStats deserializedData;
     std::uint8_t store[100];
     std::uint8_t *outputBuffer = store;
@@ -57,6 +59,7 @@ TEST(components_PlayerStats, serializeAndDeserialize)
     EXPECT_EQ(initialData.slot, deserializedData.slot);
     EXPECT_EQ(initialData.lives, deserializedData.lives);
     EXPECT_EQ(initialData.score, deserializedData.score);
+    EXPECT_EQ(initialData.charge, deserializedData.charge);
 }
 
 TEST(components_PlayerStats, smallBufferSerialize)
